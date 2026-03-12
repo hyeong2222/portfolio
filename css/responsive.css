@@ -1,0 +1,254 @@
+@media screen and (max-width :1440px) {
+    html {
+        font-size: 14px;
+    }
+
+    .section1 {
+        max-width: 1200px;
+    }
+
+    .project {
+        max-width: 1200px;
+    }
+
+    .profile-content {
+        align-items: center;
+    }
+
+    .profile-image {
+        text-align: center;
+    }
+
+    .videobox {
+        flex-direction: column;
+    }
+
+    .profile-content {
+        flex-direction: column;
+
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .menu ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 1.5rem;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu ul li {
+        list-style: none;
+    }
+}
+
+@media screen and (max-width :1024px) {
+    html {
+        font-size: 10px;
+    }
+
+    section h2 {
+        width: 90%;
+        margin: 1rem auto;
+    }
+
+    .section1 {
+        max-width: 1200px;
+    }
+
+    header {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .hyeongflex {
+        margin: 0 auto;
+    }
+
+    .toolbox,
+    .media-list {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .menu {
+        margin: 0 auto;
+    }
+
+    .project {
+        max-width: 1200px;
+    }
+
+    .videobox {
+        flex-direction: column;
+    }
+
+    .profile-content {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width :768px) {
+
+    .section1 {
+        max-width: 1200px;
+    }
+
+    .project {
+        max-width: 1200px;
+    }
+
+
+    .videobox {
+        flex-direction: column;
+    }
+
+    .profile-content {
+        flex-direction: column;
+
+    }
+}
+
+@media screen and (max-width :425px) {
+    html {
+        font-size: 7px;
+    }
+
+    .section1 {
+        max-width: 400px;
+    }
+
+    header {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .hyeongflex {
+        margin: 0 auto;
+    }
+
+    .project {
+        max-width: 400px;
+    }
+
+    .videobox {
+        flex-direction: column;
+    }
+
+    .profile-content {
+        flex-direction: column;
+
+    }
+
+    .toolbox .button {
+        flex: 1.8;
+    }
+
+    .tabitem {
+        flex: 1;
+    }
+}
+
+@media screen and (max-width :375px) {
+    html {
+        font-size: 6px;
+    }
+
+    .section1 {
+        max-width: 400px;
+    }
+
+    .project {
+        max-width: 400px;
+    }
+
+    header {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .hyeongflex {
+        margin: 0 auto;
+    }
+
+    .menu ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 1.5rem;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu ul li {
+        list-style: none;
+    }
+
+    .videobox {
+        flex-direction: column;
+    }
+
+    .profile-content {
+        flex-direction: column;
+
+    }
+
+    .label {
+        width: 100px;
+    }
+}
+
+@media screen and (max-width :320px) {
+    .section1 {
+        max-width: 400px;
+    }
+
+    .project {
+        max-width: 400px;
+    }
+
+    header {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .hyeongflex {
+        margin: 0 auto;
+    }
+
+    .menu ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 1.5rem;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu ul li {
+        list-style: none;
+    }
+
+    .videobox {
+        flex-direction: column;
+    }
+
+    .profile-content {
+        flex-direction: column;
+
+    }
+
+    .toolbox .button {
+        flex: 1.8;
+    }
+
+    .tabitem {
+        flex: 1;
+    }
+}

@@ -1,0 +1,181 @@
+@charset "utf-8";
+
+/* 폰트 */
+@font-face {
+    font-family: 'Aggro1';
+    src: url('../fonts/SB\ 어그로\ B.ttf');
+}
+
+@font-face {
+    font-family: 'Aggro2';
+    src: url('../fonts/SB\ 어그로\ M.ttf');
+}
+
+@font-face {
+    font-family: 'Aggro3';
+    src: url('../fonts/SB\ 어그로\ L.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: url(../images/총.png) 2 2, auto;
+}
+
+*:active {
+    cursor: url(../images/발싸.png) 2 2, auto;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+header {
+    position: fixed;
+    width: 30%;
+    height: 55px;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 100px;
+    border-bottom: 1px solid #ccc;
+    align-items: center;
+
+}
+
+header ul {
+    display: flex;
+    width: 60%;
+    height: 40%;
+    justify-content: flex-end;
+}
+
+header ul li {
+    padding: 0 1rem;
+}
+
+header ul li.on {
+    color: red;
+}
+
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #141414;
+    font-family: Aggro1, Aggro2, Aggro3;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.browser-container {
+    align-items: center;
+    background-color: #141414;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    position: relative;
+}
+
+.hyeongflex {
+    display: flex;
+    width: 50%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.browser-container .imgdummy {
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-wrap: wrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 1s 3s;
+}
+
+.item {
+    cursor: pointer;
+}
+
+.browser-container .imgdummy.on {
+    opacity: 1;
+    visibility: visible;
+}
+
+.browser-container .imgdummy .nugu {
+    font-size: 4rem;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.browser-container .imgdummy .item {
+    width: 30%;
+}
+
+.browser-container .imgdummy .item img {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+}
+
+.browser-container .imgdummy .item p {
+    color: #fff;
+    font-size: 2.3rem;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.hyeongflex-logo {
+    animation: fadein .5s ease-in forwards;
+    height: auto;
+    opacity: 0;
+    transition: all 1s;
+}
+
+.hyeongflex-logo.on {
+    animation: logo 3s forwards;
+}
+
+@keyframes logo {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(3);
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+        transform: scale(3);
+    }
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
