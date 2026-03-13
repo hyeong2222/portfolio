@@ -20,11 +20,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: url(../images/총.png) 2 2, auto;
+    cursor: url(../images/gun.png) 2 2, auto;
 }
 
 *:active {
-    cursor: url(../images/발싸.png) 2 2, auto;
+    cursor: url(../images/shot.png) 2 2, auto;
 }
 
 ul {
