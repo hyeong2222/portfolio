@@ -16,6 +16,17 @@
     src: url('../fonts/SB\ 어그로\ L.ttf');
 }
 
+body>p {
+    color: #e4e4e4;
+    background-color: gray;
+    padding: 1.25em;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -39,14 +50,14 @@ a {
 header {
     position: fixed;
     width: 30%;
-    height: 55px;
+    height: 3.4375rem;
     top: 0;
     left: 0;
     background-color: #fff;
     display: flex;
     justify-content: space-between;
-    padding: 0 100px;
-    border-bottom: 1px solid #ccc;
+    padding: 0 6.25rem;
+    border-bottom: 0.0625rem solid #ccc;
     align-items: center;
 
 }
@@ -95,6 +106,17 @@ body {
     overflow: hidden;
 }
 
+.hyeongflex-container {
+    display: flex;
+    width: 80%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+
+}
+
 .browser-container .imgdummy {
     display: flex;
     width: 70%;
@@ -106,7 +128,7 @@ body {
     flex-wrap: wrap;
     opacity: 0;
     visibility: hidden;
-    transition: all 1s 3s;
+    transition: all 1s;
 }
 
 .item {
@@ -127,20 +149,29 @@ body {
 }
 
 .browser-container .imgdummy .item {
-    width: 30%;
+    width: 25%; 
 }
 
-.browser-container .imgdummy .item img {
+.browser-container .imgdummy .item a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    height: 550px;
-    object-fit: cover;
+    text-decoration: none;
 }
 
-.browser-container .imgdummy .item p {
+.browser-container .imgdummy .item a img {
+    width: 15rem !important; 
+    height: 15rem !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+}
+
+.browser-container .imgdummy .item a p {
     color: #fff;
     font-size: 2.3rem;
     text-align: center;
-    padding: 1rem 0;
+    padding: 1.5rem 0 1rem 0;
 }
 
 .hyeongflex-logo {
@@ -156,17 +187,17 @@ body {
 
 @keyframes logo {
     0% {
-        transform: scale(1);
+        transform: scale(0.5);
     }
 
     50% {
-        transform: scale(3);
+        transform: scale(1);
         opacity: 1;
     }
 
     100% {
         opacity: 0.5;
-        transform: scale(3);
+        transform: scale(1);
     }
 }
 
