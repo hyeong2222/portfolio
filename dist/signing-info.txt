@@ -1,0 +1,20 @@
+서명 모드: temporary
+
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): false
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v3.2 scheme (APK Signature Scheme v3.2): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+V2 Signer: certificate DN: CN=Geulmon Test Build, OU=CI, O=Geulmon, L=Seoul, C=KR
+V2 Signer: certificate SHA-256 digest: ca9723111b9535e9f438fec2d2af74a8eb8bfb855168be23464e29944ebe239c
+V2 Signer: certificate SHA-1 digest: 98f2f1f297aaab0c0001b1b495d18355d6978387
+V2 Signer: certificate MD5 digest: 02eac20c478bdc9bc786c31542405993
+V2 Signer: key algorithm: RSA
+V2 Signer: key size (bits): 2048
+V2 Signer: public key SHA-256 digest: 2e6e5e19bf0ae8d0b8e3fb7c323dd4820b28be9a6346481ff1923d06eca7d4e2
+V2 Signer: public key SHA-1 digest: 521a101ebf0163cffa83d9be845e4f4270d25937
+V2 Signer: public key MD5 digest: 69c912c5e660840e579e956d70d7de6b
