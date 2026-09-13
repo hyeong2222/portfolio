@@ -39,9 +39,19 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: 서명키 준비 (없으면 임시 키 생성)
+        env:
+          KEYSTORE_BASE64: ${{ secrets.GEULMON_KEYSTORE_BASE64 }}
         run: |
-          if [ -f keystore/upload.jks ]; then
-            echo "SIGNING_MODE=real" >> "$GITHUB_ENV"
+          # 1순위: 레포 시크릿 GEULMON_KEYSTORE_BASE64 (공개 레포에서도 키가 노출되지 않음)
+          #   등록 방법: 로컬에서  base64 -w0 upload.jks  결과를
+          #   Settings > Secrets and variables > Actions > New repository secret 에 붙여넣기
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            mkdir -p keystore
+            printf '%s' "$KEYSTORE_BASE64" | base64 -d > keystore/upload.jks
+            echo "SIGNING_MODE=real (secret)" >> "$GITHUB_ENV"
+            echo "레포 시크릿의 서명키로 서명합니다."
+          elif [ -f keystore/upload.jks ]; then
+            echo "SIGNING_MODE=real (repo file)" >> "$GITHUB_ENV"
             echo "레포에 포함된 keystore/upload.jks 로 서명합니다."
           else
             echo "SIGNING_MODE=temporary" >> "$GITHUB_ENV"
@@ -66,8 +76,11 @@ jobs:
           cp app/build/outputs/apk/release/*.apk out/geulmon-release.apk
           ls -la out
           BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
-          "$BT/apksigner" verify --print-certs --verbose out/geulmon-release.apk
-          echo "서명 모드: $SIGNING_MODE"
+          {
+            echo "서명 모드: $SIGNING_MODE"
+            echo
+            "$BT/apksigner" verify --print-certs --verbose out/geulmon-release.apk
+          } | tee out/signing-info.txt
 
       - name: APK 업로드 (Actions 아티팩트)
         uses: actions/upload-artifact@v4
@@ -83,9 +96,10 @@ jobs:
         run: |
           mkdir -p dist
           cp geulmon-android/out/geulmon-release.apk dist/geulmon-release.apk
+          cp geulmon-android/out/signing-info.txt dist/signing-info.txt
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f dist/geulmon-release.apk
+          git add -f dist/geulmon-release.apk dist/signing-info.txt
           if git diff --cached --quiet; then
             echo "변경 없음 - 커밋 생략"
           else
