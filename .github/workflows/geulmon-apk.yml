@@ -10,7 +10,11 @@ name: Build Geulmon APK
 on:
   push:
     branches: [ 'claude/apk-generation-**' ]
+    paths-ignore: [ 'dist/**' ]
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -65,9 +69,26 @@ jobs:
           "$BT/apksigner" verify --print-certs --verbose out/geulmon-release.apk
           echo "서명 모드: $SIGNING_MODE"
 
-      - name: APK 업로드
+      - name: APK 업로드 (Actions 아티팩트)
         uses: actions/upload-artifact@v4
         with:
           name: geulmon-apk
           path: geulmon-android/out/geulmon-release.apk
           if-no-files-found: error
+
+      # 아티팩트 저장소에 접근할 수 없는 환경에서도 APK 를 받을 수 있도록
+      # 빌드 결과물을 브랜치의 dist/ 에 그대로 커밋해 둔다.
+      - name: APK 를 브랜치에 커밋
+        working-directory: .
+        run: |
+          mkdir -p dist
+          cp geulmon-android/out/geulmon-release.apk dist/geulmon-release.apk
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f dist/geulmon-release.apk
+          if git diff --cached --quiet; then
+            echo "변경 없음 - 커밋 생략"
+          else
+            git commit -m "ci: build geulmon-release.apk (signing: $SIGNING_MODE)"
+            git push origin HEAD:"${GITHUB_REF_NAME}"
+          fi
