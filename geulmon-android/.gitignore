@@ -1,0 +1,15 @@
+.gradle/
+build/
+app/build/
+local.properties
+.idea/
+*.iml
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+
+# 공개 레포에는 서명키를 절대 커밋하지 않는다
+keystore/
+*.jks
+*.keystore

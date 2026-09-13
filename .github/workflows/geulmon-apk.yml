@@ -1,0 +1,73 @@
+# 글몬 안드로이드 APK 빌드 (claude/apk-generation-* 브랜치 전용)
+#
+# 이 레포는 공개(Public) 상태이므로 실제 서명키(keystore/upload.jks)는 커밋하지 않는다.
+# keystore 파일이 없으면 빌드할 때마다 임시 키를 새로 만들어 서명한다.
+#   - 임시 키 APK: 기기에 직접 설치해 테스트하는 용도로만 사용 가능
+#   - 플레이 스토어 업로드 / 기존 설치본 업데이트에는 사용 불가 (서명이 다름)
+# 실제 upload.jks 로 서명하려면 비공개 레포에 keystore/upload.jks 를 넣고 빌드할 것.
+name: Build Geulmon APK
+
+on:
+  push:
+    branches: [ 'claude/apk-generation-**' ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: geulmon-android
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JDK 17 준비
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Android SDK 준비
+        uses: android-actions/setup-android@v3
+
+      - name: Gradle 캐시
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: 서명키 준비 (없으면 임시 키 생성)
+        run: |
+          if [ -f keystore/upload.jks ]; then
+            echo "SIGNING_MODE=real" >> "$GITHUB_ENV"
+            echo "레포에 포함된 keystore/upload.jks 로 서명합니다."
+          else
+            echo "SIGNING_MODE=temporary" >> "$GITHUB_ENV"
+            echo "keystore/upload.jks 가 없어 임시 키를 생성합니다 (테스트 설치 전용)."
+            mkdir -p keystore
+            keytool -genkeypair -v \
+              -keystore keystore/upload.jks -storetype PKCS12 \
+              -alias upload -keyalg RSA -keysize 2048 -validity 10000 \
+              -storepass geulmon2026 -keypass geulmon2026 \
+              -dname "CN=Geulmon Test Build, OU=CI, O=Geulmon, L=Seoul, C=KR"
+          fi
+
+      - name: 실행 권한
+        run: chmod +x gradlew
+
+      - name: APK 빌드
+        run: ./gradlew --no-daemon assembleRelease
+
+      - name: 결과물 정리 + 서명 확인
+        run: |
+          mkdir -p out
+          cp app/build/outputs/apk/release/*.apk out/geulmon-release.apk
+          ls -la out
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          "$BT/apksigner" verify --print-certs --verbose out/geulmon-release.apk
+          echo "서명 모드: $SIGNING_MODE"
+
+      - name: APK 업로드
+        uses: actions/upload-artifact@v4
+        with:
+          name: geulmon-apk
+          path: geulmon-android/out/geulmon-release.apk
+          if-no-files-found: error
