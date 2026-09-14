@@ -1516,7 +1516,7 @@ function rand01(h, k) { return ((hash32(h + ':' + k) % 10000) / 10000); }
 function hourSlot() { return Math.floor(Date.now() / 3600000); }
 
 // ---- 스폰 ----
-const CELL = 0.0005, SPAWN_RATE = 0.16, SPAWN_RANGE = 220;
+const CELL = 0.00035, SPAWN_RATE = 0.38, SPAWN_RANGE = 220;
 let spawns = [], extraSpawns = [];   // extra: 향로·등불 스폰 (임시)
 function pickByRarity(r, rarityShift = 0) {
   const total = SPAWN_WEIGHT.reduce((a, b) => a + b, 0);
@@ -1531,7 +1531,7 @@ function timeOfDayBias(m) { const h = new Date().getHours(); const night = h >= 
 function computeSpawns() {
   const lat = geo.lat, lng = geo.lng, slot = hourSlot(); const out = [];
   const cosL = Math.cos(lat * Math.PI / 180), cellLng = CELL / Math.max(0.2, cosL);
-  const cy0 = Math.floor(lat / CELL), cx0 = Math.floor(lng / cellLng), N = 5;
+  const cy0 = Math.floor(lat / CELL), cx0 = Math.floor(lng / cellLng), N = Math.ceil(SPAWN_RANGE / (CELL * 111320)) + 1;
   for (let dy = -N; dy <= N; dy++) for (let dx = -N; dx <= N; dx++) {
     const cy = cy0 + dy, cx = cx0 + dx, key = `${cx}_${cy}_${slot}`;
     if (S.taken[key]) continue;
