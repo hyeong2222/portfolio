@@ -9,7 +9,8 @@
 - 개인정보처리방침: `docs/privacy.html`
 - 스토어 아이콘(512px): `docs/playstore_icon_512.png`
 
-자세한 출시 절차는 함께 드린 `글몬_출시_가이드.md`를 보세요.
+자세한 출시 절차는 함께 드린 `글몬_출시_가이드.md`를, 멀티플레이 서버(Firebase, 무료)는 `글몬_멀티플레이_서버_설정.md`를 보세요.
+서버 설정값은 `app/src/main/assets/www/index.html` 맨 위 `SERVER_CONFIG`에 넣습니다.
 
 ## 게임 내용 바꾸기
 글몬 추가·수정은 `index.html` 안의 `MONSTERS` 배열(이름, 희귀도, 색, 사자성어 뜻·예문)만 고치면 됩니다.

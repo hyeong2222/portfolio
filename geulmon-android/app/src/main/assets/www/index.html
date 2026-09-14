@@ -64,12 +64,14 @@
   /* ---- 메인 메뉴 ---- */
   .menu { position: absolute; inset: 0; background: rgba(10,14,18,.86); backdrop-filter: blur(4px); display: none; z-index: 20; }
   .menu.show { display: block; }
-  .menu-items { position: absolute; left: 50%; bottom: calc(150px + env(safe-area-inset-bottom)); width: 300px; height: 190px; transform: translateX(-50%); }
+  .menu-items { position: absolute; left: 50%; bottom: calc(150px + env(safe-area-inset-bottom)); width: 320px; height: 230px; transform: translateX(-50%); }
   .menu-items button { position: absolute; width: 84px; background: none; border: 0; color: var(--paper); font-size: 13px; font-weight: 500; display: flex; flex-direction: column; align-items: center; gap: 6px; }
   .menu-items button i { width: 60px; height: 60px; border-radius: 50%; background: var(--surface); border: 2px solid var(--line); display: flex; align-items: center; justify-content: center; }
   .menu-items button i canvas { width: 44px; height: 44px; }
-  .menu-items button:nth-child(1) { left: 0; top: 96px; } .menu-items button:nth-child(2) { left: 36px; top: 10px; } .menu-items button:nth-child(3) { left: 108px; top: -30px; }
-  .menu-items button:nth-child(4) { left: 180px; top: 10px; } .menu-items button:nth-child(5) { left: 216px; top: 96px; } .menu-items button:nth-child(6) { left: 108px; top: 70px; }
+  .menu-items button:nth-child(1) { left: 0; top: 124px; }    .menu-items button:nth-child(2) { left: 26px; top: 26px; }
+  .menu-items button:nth-child(3) { left: 118px; top: -14px; } .menu-items button:nth-child(4) { left: 210px; top: 26px; }
+  .menu-items button:nth-child(5) { left: 236px; top: 124px; } .menu-items button:nth-child(6) { left: 118px; top: 80px; }
+  .menu-items button:nth-child(7) { left: 118px; top: 170px; }
   .menu-close { position: absolute; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom)); transform: translateX(-50%); width: 72px; height: 72px; border-radius: 50%; border: 2px solid rgba(255,255,255,.2); background: var(--surface); color: var(--paper); font-size: 26px; }
 
   /* ---- 오버레이 ---- */
@@ -285,6 +287,11 @@
   .b-bar .team { display: flex; gap: 4px; margin-top: 6px; } .b-bar .team span { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); } .b-bar .team span.on { background: var(--mint); } .b-bar .team span.ko { background: var(--coral); }
   .b-charged { align-self: center; border: 0; border-radius: 999px; padding: 12px 28px; font-family: var(--display); font-size: 18px; background: var(--tc, var(--amber)); color: #10161a; box-shadow: 0 4px 14px rgba(0,0,0,.4); }
   .b-charged:disabled { background: var(--surface-2); color: var(--muted); }
+  .b-charged.pulse { animation: bpulse .9s ease-in-out infinite; }
+  @keyframes bpulse { 0%, 100% { transform: scale(1); box-shadow: 0 4px 14px rgba(0,0,0,.4); } 50% { transform: scale(1.06); box-shadow: 0 0 0 10px rgba(255,190,85,.18), 0 4px 14px rgba(0,0,0,.4); } }
+  .b-shake { align-self: center; width: min(280px, 80%); background: rgba(15,21,25,.8); border: 1px solid rgba(255,255,255,.14); border-radius: 999px; padding: 6px 12px; position: relative; overflow: hidden; text-align: center; font-family: var(--display); font-size: 15px; color: var(--paper); }
+  .b-shake i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: linear-gradient(90deg, rgba(255,190,85,.35), rgba(255,111,97,.55)); transition: width .1s; }
+  .b-shake span { position: relative; }
   .b-hint { text-align: center; font-size: 12px; color: rgba(242,236,220,.8); text-shadow: 0 1px 3px rgba(0,0,0,.6); }
 
   /* ---- 첫 실행 ---- */
@@ -298,6 +305,37 @@
   #welcome .perm .btn.ok { border-color: var(--mint-deep); color: var(--mint); }
   #welcome input { padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--paper); font-size: 16px; margin-top: 6px; }
   #welcome canvas { width: 150px; height: 150px; margin-bottom: 6px; }
+
+  /* ---- 온라인 ---- */
+  .net-badge { border: 1px solid rgba(255,255,255,.15); background: rgba(15,21,25,.75); color: var(--paper); border-radius: 999px; padding: 4px 10px; font-size: 12px; display: flex; align-items: center; gap: 6px; }
+  .net-badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+  .net-badge.on i { background: var(--mint); } .net-badge.err i { background: var(--coral); }
+  .big-code { font-family: var(--display); font-size: 40px; letter-spacing: 6px; color: var(--amber); text-align: center; padding: 8px 0; }
+  .rank-row { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; margin-top: 6px; }
+  .rank-row.me { border-color: var(--mint-deep); }
+  .rank-row .no { font-family: var(--display); font-size: 18px; color: var(--muted); text-align: center; }
+  .rank-row .no.top { color: var(--amber); }
+  .rank-row .nm { font-weight: 500; } .rank-row .nm span { display: block; font-size: 12px; color: var(--muted); font-weight: 400; }
+  .rank-row .val { font-family: var(--display); font-size: 18px; font-variant-numeric: tabular-nums; }
+  .rank-row .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .pvp-sides, .trade-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: start; margin-top: 12px; }
+  .pvp-sides { grid-template-columns: 1fr 1fr; }
+  .pside, .side { background: var(--surface-2); border-radius: 12px; padding: 10px; text-align: center; font-size: 13px; }
+  .pside .lbl, .side .lbl { font-size: 11px; color: var(--muted); letter-spacing: 1px; margin-bottom: 6px; }
+  .pside .mons { display: flex; justify-content: center; gap: 4px; min-height: 44px; }
+  .pside .ok, .side .ok { color: var(--mint); font-weight: 700; margin-top: 4px; }
+  .side .ic canvas { width: 72px; height: 72px; }
+  .trade-row .arrow { align-self: center; font-size: 24px; color: var(--muted); }
+  .big-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .big-btns .btn { padding: 16px 10px; display: flex; flex-direction: column; gap: 2px; align-items: center; }
+  .big-btns .btn small { font-family: var(--body); font-size: 12px; opacity: .8; }
+  .setup-box { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin-top: 10px; }
+  .setup-box textarea { width: 100%; min-height: 110px; border-radius: 10px; border: 1px solid var(--line); background: var(--ink); color: var(--paper); font: 12px/1.4 monospace; padding: 10px; margin-top: 8px; resize: vertical; }
+  .setup-box input { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--ink); color: var(--paper); margin-top: 8px; }
+  .setup-box .st { font-size: 13px; margin-top: 8px; } .setup-box .st.on { color: var(--mint); } .setup-box .st.err { color: var(--coral); }
+  .friend-row { display: grid; grid-template-columns: 1fr auto auto; gap: 8px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; margin-top: 6px; font-size: 14px; }
+  .friend-row span { display: block; font-size: 12px; color: var(--muted); }
+  .online-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 6px; } .online-dot.on { background: var(--mint); }
 
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -316,6 +354,7 @@
     </button>
     <div class="hud-right">
       <button class="hud-btn" id="btn-compass" aria-label="방향"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-4 0 2-6z" fill="currentColor"/></svg></button>
+      <button class="net-badge" id="net-badge" hidden></button>
       <div class="hud-effects" id="hud-effects"></div>
     </div>
     <div class="hud-status" id="hud-status"></div>
@@ -338,6 +377,7 @@
       <button data-ov="dex"><i></i>도감</button>
       <button data-ov="bag"><i></i>아이템</button>
       <button data-ov="eggs"><i></i>알·파트너</button>
+      <button data-ov="online"><i></i>대전·랭킹</button>
       <button data-ov="me"><i></i>트레이너</button>
     </div>
     <button class="menu-close" id="btn-menu-close">✕</button>
@@ -350,6 +390,7 @@
   <section class="overlay" id="ov-shop"><div class="ov-head"><h2>상점 <span class="coin-chip"><canvas id="coin-ic"></canvas><b id="shop-coins">0</b></span></h2></div><div class="ov-body" id="shop-body"></div></section>
   <section class="overlay" id="ov-eggs"><div class="ov-head"><h2>알 · 파트너</h2></div><div class="ov-body" id="eggs-body"></div></section>
   <section class="overlay" id="ov-me"><div class="ov-head"><h2>트레이너</h2></div><div class="ov-body" id="me-body"></div></section>
+  <section class="overlay" id="ov-online"><div class="ov-head"><h2>대전 · 랭킹</h2><div class="sort" id="online-tabs"><button data-t="pvp" class="on">대전</button><button data-t="rank">랭킹</button><button data-t="friends">친구</button><button data-t="trade">교환</button></div></div><div class="ov-body" id="online-body"></div></section>
   <section class="overlay" id="ov-nearby"><div class="ov-head"><h2>근처 글몬</h2></div><div class="ov-body"><div id="nearby-list"></div></div></section>
   <section class="overlay" id="ov-detail"><div class="ov-body" id="detail-body"></div></section>
   <button class="ov-close" id="btn-ov-close" hidden>✕</button>
@@ -382,6 +423,7 @@
   </div>
   <div class="b-bottom">
     <div class="b-bar me"><div class="nm" id="b-me-name"></div><div class="hp"><i id="b-me-hp"></i></div><div class="en"><i id="b-energy"></i></div><div class="team" id="b-team"></div></div>
+    <div class="b-shake" id="b-shake" hidden><i></i><span id="b-shake-t"></span></div>
     <button class="b-charged" id="b-charged">차지 기술</button>
     <div class="b-hint">탭: 공격 · 좌우 스와이프: 회피</div>
   </div>
@@ -405,6 +447,18 @@
 </div>
 
 <script>
+// =====================================================================
+//  글몬 서버 설정 — 이 블록만 고치면 됩니다
+// =====================================================================
+// ▼▼▼ 서버 설정 (Firebase 콘솔에서 복사해 붙여넣기) ▼▼▼
+// 앱 안에서도 붙여넣을 수 있습니다: 트레이너 화면 → 서버 연결 → 설정 붙여넣기
+const SERVER_CONFIG = {
+  apiKey: '',        // 예: "AIzaSyD...."
+  databaseURL: '',   // 예: "https://geulmon-default-rtdb.asia-southeast1.firebasedatabase.app"
+  group: 'yujung',   // 학원(반) 구분용. 같은 값을 쓰는 사람끼리 만납니다.
+};
+// ▲▲▲ 여기까지 ▲▲▲
+
 // =====================================================================
 //  글몬 v2 — 데이터
 // =====================================================================
@@ -1164,35 +1218,94 @@ const PARTS = {
 function hexA(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`; }
 
 // 몬스터 스프라이트 (size: 출력 px, t: 초)
+// opts.tilt {x,y} (-1..1): 층별 시차 — 뒤 파츠/몸통/앞 파츠가 서로 다르게 밀려 깊이감
+// opts.light {x,y}: 조명 방향 → 밝은 면·그늘 면을 스프라이트 위에 덧입힘 (2.5D)
+// opts.height (0..1): 점프 높이 → 그림자가 작아지고 옅어짐
+let _lit = null;
+// 나중에 캐릭터 그림을 교체할 때: MONSTERS 항목에 img: 'sprites/mongle.png' (또는 dataURL)만 넣으면 그 이미지가 대신 그려진다.
+// 이미지는 정사각형(예: 512×512, 투명 배경) 기준. 조명·그림자·점프 연출은 그대로 적용된다.
+const _imgCache = {};
+function spriteImg(src) { let r = _imgCache[src]; if (!r) { r = _imgCache[src] = { img: new Image(), ok: false }; r.img.onload = () => { r.ok = true; }; r.img.src = src; } return r.ok ? r.img : null; }
+function drawMonsterLayers(ctx, m, t, tilt) {
+  if (m.img) { const im = spriteImg(m.img); if (im) { const bob = Math.sin(t * 3) * 3; ctx.drawImage(im, 10, 0 + bob, 180, 180); return; } }
+  const a = ANCHOR[m.body] || ANCHOR.blob;
+  const px = tilt ? tilt.x * 7 : 0, py = tilt ? tilt.y * 5 : 0;
+  ctx.save(); ctx.translate(-px, -py); for (const p of m.parts || []) if (PARTS[p] && PARTS[p].pre) PARTS[p].pre(ctx, m, a, t); ctx.restore();
+  BODIES[m.body](ctx, m, t);
+  ctx.save(); ctx.translate(px, py); for (const p of m.parts || []) if (PARTS[p] && PARTS[p].post) PARTS[p].post(ctx, m, a, t); ctx.restore();
+}
 function drawMonster(ctx, m, x, y, size, t, opts = {}) {
   const sc = (opts.ignoreScale ? 1 : m.scale || 1);
+  const h = opts.height || 0;
   ctx.save();
   ctx.translate(x, y);
   if (opts.flip) ctx.scale(-1, 1);
   ctx.scale(size * sc / 200, size * sc / 200);
   ctx.translate(-100, -100);
-  if (opts.shadow !== false) { ctx.beginPath(); ctx.ellipse(100, 178, 52, 9, 0, 0, Math.PI * 2); ctx.fillStyle = 'rgba(0,0,0,.28)'; ctx.fill(); }
+  if (opts.shadow !== false) { ctx.beginPath(); ctx.ellipse(100 + (opts.tilt ? -opts.tilt.x * 6 : 0), 178 + h * 30, 52 * (1 - h * 0.35), 9 * (1 - h * 0.35), 0, 0, Math.PI * 2); ctx.fillStyle = `rgba(0,0,0,${0.28 * (1 - h * 0.5)})`; ctx.fill(); }
   m._blink = opts.blink || false; m._caught = opts.caught || false;
-  const a = ANCHOR[m.body] || ANCHOR.blob;
-  for (const p of m.parts || []) if (PARTS[p] && PARTS[p].pre) PARTS[p].pre(ctx, m, a, t);
-  BODIES[m.body](ctx, m, t);
-  for (const p of m.parts || []) if (PARTS[p] && PARTS[p].post) PARTS[p].post(ctx, m, a, t);
+  if (!opts.light) { drawMonsterLayers(ctx, m, t, opts.tilt); ctx.restore(); return; }
+  // 조명 모드: 오프스크린에 그린 뒤 스프라이트 모양대로만(source-atop) 명암을 덧입힘
+  const S2 = 220; if (!_lit) { _lit = document.createElement('canvas'); _lit.width = S2 * 2; _lit.height = S2 * 2; }
+  const lc = _lit.getContext('2d'); lc.setTransform(2, 0, 0, 2, 0, 0); lc.clearRect(0, 0, S2, S2);
+  lc.save(); lc.translate(10, 10); drawMonsterLayers(lc, m, t, opts.tilt); lc.restore();
+  lc.save(); lc.globalCompositeOperation = 'source-atop';
+  const lx = 110 + opts.light.x * 90, ly = 100 + opts.light.y * 90;
+  const lg = lc.createRadialGradient(lx, ly, 10, lx, ly, 230);
+  lg.addColorStop(0, 'rgba(255,250,230,.34)'); lg.addColorStop(0.42, 'rgba(255,255,255,0)'); lg.addColorStop(1, 'rgba(20,10,40,.46)');
+  lc.fillStyle = lg; lc.fillRect(0, 0, S2, S2); lc.restore();
+  ctx.drawImage(_lit, 0, 0, S2 * 2, S2 * 2, -10, -10, S2, S2);
   ctx.restore();
 }
 
-// 구슬 (등급별 색)
-const ORB_STYLE = { ball1: ['#fff3c4', '#ffbe55', '#d97a1a'], ball2: ['#e0f4ff', '#6fc7ff', '#2f6fd0'], ball3: ['#e8e0ff', '#b18cff', '#4a2f9a'] };
-function drawOrb(ctx, x, y, r, spin = 0, kind = 'ball1') {
+// ---- 글구슬: 캔버스 2D로 그리는 진짜 3D 구체 ----
+// 구면 위에 정의한 곡선(먹 소용돌이·적도 띠·먹점)을 회전행렬로 돌린 뒤 정사영하고 앞면(z>0)만 그린다.
+// spin: 굴러가는 회전(화면 X축), tilt: 커브 회전(화면 Y축)
+const ORB_STYLE = { ball1: ['#fff3c4', '#ffbe55', '#d97a1a', '#7a3d08'], ball2: ['#e0f4ff', '#6fc7ff', '#2f6fd0', '#143a7a'], ball3: ['#e8e0ff', '#b18cff', '#4a2f9a', '#241452'] };
+const ORB_CURVES = (() => {
+  const swirl = []; for (let i = 0; i <= 64; i++) { const t = i / 64; const th = 0.3 + t * 1.9, ph = t * Math.PI * 2.4; swirl.push([Math.sin(th) * Math.cos(ph), Math.cos(th), Math.sin(th) * Math.sin(ph), 1 - t * 0.55]); }
+  const seam = []; for (let i = 0; i <= 72; i++) { const a = i / 72 * Math.PI * 2; seam.push([Math.cos(a), 0, Math.sin(a), 1]); }
+  const dot = [[0.15, -0.72, 0.68]];
+  return { swirl, seam, dot };
+})();
+function rotXYZ(p, ax, ay, az) {
+  let [x, y, z] = p;
+  let c = Math.cos(ax), s = Math.sin(ax); [y, z] = [y * c - z * s, y * s + z * c];
+  c = Math.cos(ay); s = Math.sin(ay); [x, z] = [x * c + z * s, -x * s + z * c];
+  c = Math.cos(az); s = Math.sin(az); [x, y] = [x * c - y * s, x * s + y * c];
+  return [x, y, z];
+}
+function drawOrb(ctx, x, y, r, spin = 0, kind = 'ball1', tilt = 0) {
   const cs = ORB_STYLE[kind] || ORB_STYLE.ball1;
-  ctx.save(); ctx.translate(x, y); ctx.rotate(spin);
-  const g = ctx.createRadialGradient(-r * 0.35, -r * 0.4, r * 0.1, 0, 0, r);
-  g.addColorStop(0, cs[0]); g.addColorStop(0.55, cs[1]); g.addColorStop(1, cs[2]);
+  ctx.save(); ctx.translate(x, y);
+  // 1) 구체 바탕 (좌상단 광원)
+  const g = ctx.createRadialGradient(-r * 0.38, -r * 0.42, r * 0.05, -r * 0.1, -r * 0.1, r * 1.15);
+  g.addColorStop(0, cs[0]); g.addColorStop(0.35, cs[1]); g.addColorStop(0.8, cs[2]); g.addColorStop(1, cs[3]);
   ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
-  ctx.lineWidth = Math.max(2, r * 0.12); ctx.strokeStyle = INK; ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(-r * 0.55, -r * 0.1); ctx.quadraticCurveTo(0, -r * 0.75, r * 0.5, -r * 0.15);
-  ctx.quadraticCurveTo(r * 0.1, -r * 0.05, r * 0.05, r * 0.55);
-  ctx.lineWidth = Math.max(2, r * 0.16); ctx.strokeStyle = INK; ctx.lineCap = 'round'; ctx.stroke();
-  ctx.beginPath(); ctx.arc(-r * 0.3, -r * 0.4, r * 0.16, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255,255,255,.7)'; ctx.fill();
+  // 2) 구면 곡선 (앞면만, 깊이에 따라 두께·투명도)
+  ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r * 0.985, 0, Math.PI * 2); ctx.clip();
+  const ax = 0.35 + spin, ay = -0.55 + tilt, az = 0.25;
+  const drawCurve = (pts, width, color, closed) => {
+    const P = pts.map(p => { const q = rotXYZ(p, ax, ay, az); return [q[0] * r, -q[1] * r, q[2], p[3] || 1]; });
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    for (let i = 1; i < P.length; i++) {
+      const a = P[i - 1], b = P[i]; const z = (a[2] + b[2]) / 2; if (z < 0) continue;
+      ctx.globalAlpha = Math.min(1, z * 3.5); ctx.lineWidth = Math.max(1, width * (0.45 + 0.55 * z) * b[3]);
+      ctx.strokeStyle = color; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  };
+  drawCurve(ORB_CURVES.seam, r * 0.07, 'rgba(34,25,15,.55)');
+  drawCurve(ORB_CURVES.swirl, r * 0.2, INK);
+  for (const d of ORB_CURVES.dot) { const q = rotXYZ(d, ax, ay, az); if (q[2] > 0) { ctx.globalAlpha = Math.min(1, q[2] * 3); ctx.beginPath(); ctx.ellipse(q[0] * r, -q[1] * r, r * 0.11 * (0.5 + 0.5 * q[2]) , r * 0.11, 0, 0, Math.PI * 2); ctx.fillStyle = INK; ctx.fill(); ctx.globalAlpha = 1; } }
+  ctx.restore();
+  // 3) 림(가장자리) 음영 + 반사광
+  const rim = ctx.createRadialGradient(-r * 0.15, -r * 0.15, r * 0.55, 0, 0, r); rim.addColorStop(0, 'rgba(0,0,0,0)'); rim.addColorStop(1, 'rgba(20,10,0,.45)');
+  ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fillStyle = rim; ctx.fill();
+  ctx.save(); ctx.translate(-r * 0.38, -r * 0.42); ctx.rotate(-0.7); ctx.beginPath(); ctx.ellipse(0, 0, r * 0.2, r * 0.11, 0, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255,255,255,.75)'; ctx.fill(); ctx.restore();
+  ctx.beginPath(); ctx.arc(r * 0.3, r * 0.42, r * 0.28, 0, Math.PI * 2); const bounce = ctx.createRadialGradient(r * 0.3, r * 0.42, 0, r * 0.3, r * 0.42, r * 0.3); bounce.addColorStop(0, 'rgba(255,255,255,.12)'); bounce.addColorStop(1, 'rgba(255,255,255,0)'); ctx.fillStyle = bounce; ctx.fill();
+  // 4) 외곽선 (만화 스타일 유지)
+  ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.lineWidth = Math.max(1.5, r * 0.08); ctx.strokeStyle = INK; ctx.stroke();
   ctx.restore();
 }
 
@@ -1275,7 +1388,7 @@ function defaultSave() {
     candy: {}, dex: {}, stats: {}, daily: { catchDay: '', catchStreak: 0, spinDay: '', spinStreak: 0 },
     stopUsed: {}, gyms: {}, taken: {}, journal: [], effects: {}, lures: {},
     settings: { ar: true, sfx: true }, welcomed: false, createdAt: Date.now(), lastPos: null, walkAcc: 0,
-    tutorial: {},
+    tutorial: {}, friends: [], pvp: { wins: 0, losses: 0 }, tradesDone: {},
   };
 }
 let S = defaultSave();
@@ -1486,7 +1599,8 @@ function computePOIs() {
 }
 function stopReady(st) { const u = S.stopUsed[st.key]; return !u || Date.now() - u > 5 * 60000; }
 function gymState(g) {
-  if (S.gyms[g.key]) return S.gyms[g.key];
+  if (typeof netOn === 'function' && netOn() && ON.gymStreamOn) { const og = onlineGym(g); if (og) return og; }
+  else if (S.gyms[g.key]) return S.gyms[g.key];
   // NPC 서당: 결정적 팀·수비수
   const teams = Object.keys(TEAMS); const team = teams[hash32(g.h + 't') % 3];
   const n = 1 + hash32(g.h + 'n') % 3; const defenders = [];
@@ -1559,6 +1673,7 @@ async function startOrientation() {
   }
   if ('ondeviceorientationabsolute' in window) window.addEventListener('deviceorientationabsolute', onOrientation, true);
   window.addEventListener('deviceorientation', onOrientation, true);
+  startMotion().catch(() => {});
   setTimeout(() => setPermState('ori', ORI.have), 1500);
   return true;
 }
@@ -1761,6 +1876,7 @@ async function startEncounter(spawn) {
   arEl.classList.add('active'); resizeStage(); updateArHud();
   E.bear = geo.heading || 0;
   const b = ORI.raw && ORI.raw.beta != null ? ORI.raw.beta : 80; E.beta0 = Math.max(45, Math.min(110, b));
+  E.gamma0 = ORI.raw && ORI.raw.gamma != null ? ORI.raw.gamma : 0;
   E.hopX = 0; E.hopY = 0; E.hopT = performance.now() + 4000; E.nextAttack = performance.now() + 6000 + Math.random() * 6000;
   E.msize = Math.min(E.W, E.H) * 0.5; E.t0 = performance.now();
   hintEl.textContent = itemCount(E.ball) > 0 ? '구슬을 위로 밀어 던지세요' : '구슬이 없어요 · 글터에서 구슬을 받아 오세요';
@@ -1811,7 +1927,10 @@ function loop(now) {
       ctx.beginPath(); ctx.arc(E.mx, E.my, E.msize * 0.42, 0, Math.PI * 2); ctx.strokeStyle = 'rgba(242,236,220,.55)'; ctx.lineWidth = 2; ctx.stroke();
       ctx.beginPath(); ctx.arc(E.mx, E.my, E.msize * 0.42 * (0.2 + 0.8 * E.ring), 0, Math.PI * 2); ctx.strokeStyle = rc; ctx.lineWidth = 3; ctx.stroke();
       if (attacking) { ctx.beginPath(); ctx.arc(E.mx, E.my, E.msize * 0.5, 0, Math.PI * 2); ctx.strokeStyle = 'rgba(255,111,97,.8)'; ctx.lineWidth = 4; ctx.setLineDash([8, 8]); ctx.stroke(); ctx.setLineDash([]); }
-      drawMonster(ctx, E.m, E.mx, E.my, msz, t, { blink: E.blink });
+      const gx = ORI.raw && ORI.raw.gamma != null ? Math.max(-1, Math.min(1, (ORI.raw.gamma - E.gamma0) / 35)) : Math.sin(t * 0.7) * 0.25;
+      const gy = ORI.raw && ORI.raw.beta != null ? Math.max(-1, Math.min(1, (ORI.raw.beta - E.beta0) / 35)) : 0;
+      const bobH = (Math.sin(now / 400) + 1) / 2 * 0.12 + (attacking ? 0.25 : 0);
+      drawMonster(ctx, E.m, E.mx, E.my, msz, t, { blink: E.blink, tilt: { x: gx, y: gy }, light: { x: -0.45 + gx * 0.5, y: -0.5 + gy * 0.4 }, height: bobH });
       // CP 표시
       ctx.font = '600 14px ' + getComputedStyle(document.body).fontFamily; ctx.textAlign = 'center'; ctx.fillStyle = 'rgba(0,0,0,.45)';
       ctx.fillText('CP ' + E.cp, E.mx + 1, E.my - E.msize * 0.5 - 6 + 1); ctx.fillStyle = '#fff'; ctx.fillText('CP ' + E.cp, E.mx, E.my - E.msize * 0.5 - 6);
@@ -1824,7 +1943,7 @@ function loop(now) {
     const x = o.x0 + (o.x1 - o.x0) * k + curve, y = o.y0 + (o.y1 - o.y0) * k - Math.sin(k * Math.PI) * o.arc, r = o.r0 * (1 - 0.6 * k);
     E.trail.push({ x, y, r, a: 1 }); if (E.trail.length > 14) E.trail.shift();
     for (const tr of E.trail) { ctx.beginPath(); ctx.arc(tr.x, tr.y, tr.r * 0.5 * tr.a, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,190,85,${0.25 * tr.a})`; ctx.fill(); tr.a *= 0.85; }
-    drawOrb(ctx, x, y, r, k * (o.curve ? 18 : 9), E.ball);
+    drawOrb(ctx, x, y, r, k * 11, E.ball, o.curve ? o.curveDir * k * 5 : 0);
     if (k >= 1) resolveThrow(x, y, now, attacking);
   }
   if (E.phase === 'shake' && E.shake) {
@@ -1972,12 +2091,14 @@ function openGym(g, near) {
   for (const d of gs.defenders) { html += `<div class="def"><div class="ic" data-mon="${d.id}"></div><div><b>${instName(d)}</b> <span class="cp">CP ${instCP(d)}</span><div class="sub">${d.owner || (S.name || '나')}</div></div></div>`; }
   html += `</div>`;
   if (mine) {
-    html += `<div class="quote">내 글몬이 지키는 중 · 모인 엽전 <b>${coinsAccrued(gs)}</b>개 (하루 최대 ${COIN_DAY_CAP})<br><span class="sub">8시간이 지나면 글몬이 돌아오며 엽전을 받습니다.</span></div>`;
+    const myInst = gs.online ? S.monsters.find(i => i.atGym === g.key) : null;
+    const acc = gs.online && myInst ? Math.min(COIN_DAY_CAP, Math.floor((Date.now() - (myInst.placedAt || Date.now())) / 600000)) : coinsAccrued(gs);
+    html += `<div class="quote">내 글몬이 지키는 중 · 모인 엽전 <b>${acc}</b>개 (하루 최대 ${COIN_DAY_CAP})<br><span class="sub">${gs.online ? '다른 팀이 서당을 빼앗으면 글몬이 돌아오며 엽전을 받습니다.' : '8시간이 지나면 글몬이 돌아오며 엽전을 받습니다.'}</span></div>`;
     html += `<div class="btns"><button class="btn ghost" onclick="closeSheet()">닫기</button><button class="btn" id="btn-gym-return">지금 돌려받기</button></div>`;
   } else if (!S.team) {
     html += `<p>서당 배틀은 레벨 5부터 팀을 고른 뒤 할 수 있어요.</p><div class="btns"><button class="btn ghost" onclick="closeSheet()">닫기</button>${S.level >= 5 ? '<button class="btn" onclick="closeSheet();openTeamSelect()">팀 고르기</button>' : ''}</div>`;
   } else if (gs.team === S.team) {
-    const room = gs.defenders.length < 3;
+    const room = gs.defenders.length < 3 && !(gs.online && gs.defenders.some(d => d.ownerUid === NET.uid));
     html += `<p>같은 팀 서당이에요. ${room ? '글몬을 배치해 함께 지킬 수 있습니다.' : '자리가 다 찼어요.'}</p>`;
     html += `<div class="btns"><button class="btn ghost" onclick="closeSheet()">닫기</button>${room && near ? `<button class="btn" id="btn-gym-place">글몬 배치</button>` : ''}</div>`;
   } else {
@@ -1985,11 +2106,12 @@ function openGym(g, near) {
   }
   openSheet(html);
   for (const el of sheet.querySelectorAll('[data-mon]')) el.appendChild(monsterIcon(MON[el.dataset.mon], 56));
-  const rb = document.getElementById('btn-gym-return'); if (rb) rb.onclick = () => { returnFromGym(g.key, gs, false); save(); closeSheet(); updateHud(); };
+  const rb = document.getElementById('btn-gym-return'); if (rb) rb.onclick = () => { if (gs.online) { const myInst = S.monsters.find(i => i.atGym === g.key); if (myInst) netDel(`gyms/${g.key}/defenders/${myInst.uid}`).then(() => { if (Object.keys((gs.raw && gs.raw.defenders) || {}).length <= 1) netDel(`gyms/${g.key}`).catch(() => {}); }).catch(() => {}); closeSheet(); return; } returnFromGym(g.key, gs, false); save(); closeSheet(); updateHud(); };
   const pb = document.getElementById('btn-gym-place'); if (pb) pb.onclick = () => pickMonster('서당에 배치할 글몬', i => !i.atGym && i.hp > 0, inst => { placeAtGym(g, gs, inst); });
   const bb = document.getElementById('btn-gym-battle'); if (bb) bb.onclick = () => chooseBattleTeam(g, gs);
 }
 function placeAtGym(g, gs, inst) {
+  if (netOn()) { placeAtGymOnline(g, gs, inst).then(() => { closeSheet(); toast(`${instName(inst)}이(가) ${g.name}을(를) 지킵니다`); }).catch(e => toast('서버 오류: ' + e.message)); return; }
   const rec = S.gyms[g.key] || (S.gyms[g.key] = { team: gs.team, defenders: gs.defenders.slice(), owner: 'me', since: Date.now(), name: g.name, mine: [] });
   rec.owner = 'me'; rec.mine = rec.mine || []; if (!rec.since) rec.since = Date.now();
   inst.atGym = g.key; rec.defenders.push(inst); rec.mine.push(inst.uid);
@@ -2011,12 +2133,12 @@ function chooseBattleTeam(g, gs) {
 }
 
 // ---- 배틀 ----
-const B = { active: false, raf: 0, g: null, gs: null, team: [], ti: 0, di: 0, energy: 0, dEnergy: 0, lastTap: 0, dodgeUntil: 0, dTel: 0, dNext: 0, particles: [], log: [], t0: 0, shakeMe: 0, shakeDef: 0, won: null, defHp: [] };
+const B = { mode: 'gym', active: false, raf: 0, g: null, gs: null, team: [], ti: 0, di: 0, energy: 0, dEnergy: 0, lastTap: 0, dodgeUntil: 0, dTel: 0, dNext: 0, particles: [], log: [], t0: 0, shakeMe: 0, shakeDef: 0, won: null, defHp: [] };
 const bEl = document.getElementById('battle'), bStage = document.getElementById('bstage');
 function startBattle(g, gs, team) {
-  B.active = true; B.g = g; B.gs = gs; B.team = team; B.ti = 0; B.di = 0; B.energy = 0; B.dEnergy = 0; B.particles = []; B.won = null; B.t0 = performance.now();
+  B.mode = 'gym'; B.active = true; B.g = g; B.gs = gs; B.team = team; B.ti = 0; B.di = 0; B.energy = 0; B.dEnergy = 0; B.particles = []; B.won = null; B.t0 = performance.now();
   B.defHp = gs.defenders.map(d => instMaxHP(d)); B.dNext = performance.now() + 2500; B.dTel = 0;
-  bEl.classList.add('active'); resizeBattle(); renderBattleHud();
+  bEl.classList.add('active'); resizeBattle(); renderBattleHud(); motionBattleStart();
   cancelAnimationFrame(B.raf); B.raf = requestAnimationFrame(battleLoop);
 }
 let bW = 0, bH = 0, bDpr = 1;
@@ -2025,12 +2147,13 @@ function me() { return B.team[B.ti]; } function defender() { return B.gs.defende
 function renderBattleHud() {
   const m = me(), d = defender(); if (!m || !d) return;
   document.getElementById('b-me-name').textContent = `${instName(m)} CP ${instCP(m)}`;
-  document.getElementById('b-def-name').textContent = `${instName(d)} CP ${instCP(d)}`;
+  document.getElementById('b-def-name').textContent = (B.mode === 'pvp' ? PVP.oppName + ' · ' : '') + `${instName(d)} CP ${instCP(d)}`;
   document.getElementById('b-me-hp').style.width = (m.hp / instMaxHP(m) * 100) + '%';
   document.getElementById('b-def-hp').style.width = (B.defHp[B.di] / instMaxHP(d) * 100) + '%';
   document.getElementById('b-energy').style.width = Math.min(100, B.energy) + '%';
-  const ch = MOVES[m.charged]; const cb = document.getElementById('b-charged'); cb.textContent = ch.name; cb.disabled = B.energy < ch.energy; cb.style.setProperty('--tc', TYPES[ch.type].color);
-  document.getElementById('b-count').textContent = `${B.di + 1} / ${B.gs.defenders.length}`;
+  const ch = MOVES[m.charged]; const cb = document.getElementById('b-charged'); const ready = B.energy >= ch.energy;
+  cb.textContent = ready && motionEnabled() && MOTION.have ? `흔들기! ${ch.name}` : ch.name; cb.disabled = !ready; cb.classList.toggle('pulse', ready && motionEnabled() && MOTION.have); cb.style.setProperty('--tc', TYPES[ch.type].color);
+  document.getElementById('b-count').textContent = B.mode === 'pvp' ? `남은 시간 ${Math.max(0, Math.ceil((PVP.timerEnd - Date.now()) / 1000))}초 · 상대 ${B.gs.defenders.filter((d, k) => (B.defHp[k] || 0) > 0).length}마리` : `${B.di + 1} / ${B.gs.defenders.length}`;
   document.getElementById('b-team').innerHTML = B.team.map((t, i) => `<span class="${i === B.ti ? 'on' : ''} ${t.hp <= 0 ? 'ko' : ''}"></span>`).join('');
 }
 function battleLoop(now) {
@@ -2041,12 +2164,12 @@ function battleLoop(now) {
   const g = ctx.createLinearGradient(0, 0, 0, bH); g.addColorStop(0, '#2a4a63'); g.addColorStop(0.5, '#3d6a52'); g.addColorStop(1, '#1e3a2a'); ctx.fillStyle = g; ctx.fillRect(0, 0, bW, bH);
   ctx.fillStyle = 'rgba(0,0,0,.15)'; ctx.fillRect(0, bH * 0.5, bW, bH * 0.5);
   // 수비수 (위) / 내 글몬 (아래, 뒤집기)
-  if (d) { const dx = bW * 0.62 + (B.shakeDef > now ? (Math.random() - 0.5) * 12 : 0); const dy = bH * 0.32 + (B.dTel > now ? -12 : 0); drawMonster(ctx, MON[d.id], dx, dy, Math.min(bW, bH) * 0.42, t, { flip: true }); if (B.dTel > now) { ctx.beginPath(); ctx.arc(dx, dy, Math.min(bW, bH) * 0.24, 0, Math.PI * 2); ctx.strokeStyle = '#ff6f61'; ctx.lineWidth = 4; ctx.setLineDash([6, 6]); ctx.stroke(); ctx.setLineDash([]); } }
-  if (m) { const mx = bW * 0.34 + (B.shakeMe > now ? (Math.random() - 0.5) * 12 : 0) + (B.dodgeUntil > now ? Math.sin((B.dodgeUntil - now) / 500 * Math.PI) * -70 * B.dodgeDir : 0); drawMonster(ctx, MON[m.id], mx, bH * 0.66, Math.min(bW, bH) * 0.5, t); }
+  if (d) { const dx = bW * 0.62 + (B.shakeDef > now ? (Math.random() - 0.5) * 12 : 0); const dy = bH * 0.32 + (B.dTel > now ? -12 : 0); drawMonster(ctx, MON[d.id], dx, dy, Math.min(bW, bH) * 0.42, t, { flip: true, light: { x: -0.4, y: -0.6 }, height: B.dTel > now ? 0.3 : 0.05 }); if (B.dTel > now) { ctx.beginPath(); ctx.arc(dx, dy, Math.min(bW, bH) * 0.24, 0, Math.PI * 2); ctx.strokeStyle = '#ff6f61'; ctx.lineWidth = 4; ctx.setLineDash([6, 6]); ctx.stroke(); ctx.setLineDash([]); } }
+  if (m) { const mx = bW * 0.34 + (B.shakeMe > now ? (Math.random() - 0.5) * 12 : 0) + (B.dodgeUntil > now ? Math.sin((B.dodgeUntil - now) / 500 * Math.PI) * -70 * B.dodgeDir : 0); drawMonster(ctx, MON[m.id], mx, bH * 0.66, Math.min(bW, bH) * 0.5, t, { light: { x: -0.4, y: -0.6 }, height: B.dodgeUntil > now ? 0.25 : 0.05 }); }
   for (const q of B.particles) { q.x += q.vx; q.y += q.vy; q.a -= 0.03; ctx.globalAlpha = Math.max(0, q.a); ctx.beginPath(); ctx.arc(q.x, q.y, q.r, 0, Math.PI * 2); ctx.fillStyle = q.c; ctx.fill(); }
   ctx.globalAlpha = 1; B.particles = B.particles.filter(q => q.a > 0);
   // 수비수 AI
-  if (B.won == null && d && m) {
+  if (B.mode !== 'pvp' && B.won == null && d && m) {
     if (!B.dTel && now > B.dNext) { B.dTel = now + 450; }
     if (B.dTel && now > B.dTel) {
       const useCharged = B.dEnergy >= MOVES[d.charged].energy; const mv = MOVES[useCharged ? d.charged : d.fast];
@@ -2059,28 +2182,32 @@ function battleLoop(now) {
       renderBattleHud();
     }
   }
+  if (B.mode === 'pvp' && Math.floor(now / 1000) !== B._lastSec) { B._lastSec = Math.floor(now / 1000); renderBattleHud(); }
+  motionTick(now);
   for (const f of B.log) { f.y -= 0.8; f.a -= 0.02; ctx.globalAlpha = Math.max(0, f.a); ctx.font = '700 22px ' + getComputedStyle(document.body).fontFamily; ctx.textAlign = 'center'; ctx.fillStyle = f.c; ctx.fillText(f.t, f.x, f.y); }
   ctx.globalAlpha = 1; B.log = B.log.filter(f => f.a > 0);
   B.raf = requestAnimationFrame(battleLoop);
 }
 function floatText(t, x, y, c) { B.log.push({ t, x, y, c, a: 1.2 }); }
 function bBurst(x, y, c) { for (let i = 0; i < 16; i++) { const a = Math.random() * Math.PI * 2, v = 2 + Math.random() * 4; B.particles.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: 3 + Math.random() * 4, c, a: 1 }); } }
-function myAttack(charged) {
+function myAttack(charged, mult = 1) {
   if (!B.active || B.won != null) return; const m = me(), d = defender(); if (!m || !d) return;
   const now = performance.now();
   const mv = MOVES[charged ? m.charged : m.fast];
   if (charged) { if (B.energy < mv.energy) return; B.energy -= mv.energy; }
   else { if (now - B.lastTap < mv.dur) return; B.lastTap = now; B.energy = Math.min(100, B.energy + mv.energy); }
-  const dmg = damage(mv.power, statAtk(MON[m.id], m.iv, m.level), statDef(MON[d.id], d.iv, d.level), typeMult(mv.type, MON[d.id].types), MON[m.id].types.includes(mv.type));
+  mult = charged ? Math.max(1, Math.min(1.5, mult || 1)) : 1;
+  const dmg = Math.floor(damage(mv.power, statAtk(MON[m.id], m.iv, m.level), statDef(MON[d.id], d.iv, d.level), typeMult(mv.type, MON[d.id].types), MON[m.id].types.includes(mv.type)) * mult);
   B.defHp[B.di] = Math.max(0, B.defHp[B.di] - dmg); B.shakeDef = now + 200;
   const eff = typeMult(mv.type, MON[d.id].types);
   floatText('-' + dmg + (eff > 1 ? ' 효과 굉장!' : eff < 1 ? ' 효과 별로' : ''), bW * 0.62, bH * 0.2, eff > 1 ? '#ffd35a' : '#fff');
   bBurst(bW * 0.62, bH * 0.32, TYPES[mv.type].color);
-  if (charged) floatText(mv.name + '!', bW * 0.5, bH * 0.5, TYPES[mv.type].color);
+  if (charged) floatText(mv.name + (mult > 1.05 ? ` ×${mult.toFixed(1)}!` : '!'), bW * 0.5, bH * 0.5, TYPES[mv.type].color);
+  if (B.mode === 'pvp') { pvpSendMove(charged ? 'charged' : 'fast', charged ? m.charged : m.fast, mult); renderBattleHud(); return; }
   if (B.defHp[B.di] <= 0) nextDefender();
   renderBattleHud();
 }
-function dodge(dir) { if (!B.active) return; const now = performance.now(); if (B.dodgeUntil > now) return; B.dodgeUntil = now + 500; B.dodgeDir = dir; }
+function dodge(dir) { if (!B.active) return; const now = performance.now(); if (B.dodgeUntil > now) return; B.dodgeUntil = now + 500; B.dodgeDir = dir; if (B.mode === 'pvp') pvpSendMove('dodge', null); }
 function nextAttacker() { const i = B.team.findIndex((t, k) => k > B.ti && t.hp > 0); if (i < 0) { const any = B.team.findIndex(t => t.hp > 0); if (any < 0) return endBattle(false); B.ti = any; } else B.ti = i; B.energy = 0; floatText('교체!', bW * 0.34, bH * 0.5, '#fff'); }
 function nextDefender() { grantXp(100); if (B.di + 1 >= B.gs.defenders.length) return endBattle(true); B.di++; B.dEnergy = 0; B.dTel = 0; B.dNext = performance.now() + 2500; floatText('다음 수비수!', bW * 0.62, bH * 0.5, '#fff'); }
 function endBattle(won) {
@@ -2089,13 +2216,14 @@ function endBattle(won) {
     B.active = false; cancelAnimationFrame(B.raf); bEl.classList.remove('active');
     if (won) {
       addStat('wins'); grantXp(150); journal(`${B.g.name} 배틀에서 이겼다`, 'gym');
-      const rec = { team: S.team, defenders: [], owner: 'me', since: Date.now(), name: B.g.name, mine: [] }; S.gyms[B.g.key] = rec; save();
+      const rec = { team: S.team, defenders: [], owner: 'me', since: Date.now(), name: B.g.name, mine: [] };
+      if (netOn()) { takeGymOnline(B.g).catch(() => {}); } else { S.gyms[B.g.key] = rec; save(); }
       openSheet(`<h3>승리!</h3><p>${B.g.name}이(가) ${TEAMS[S.team].name} 팀의 서당이 되었어요. 글몬을 한 마리 배치해 지키게 하세요. 지키는 동안 10분마다 엽전 1개가 모입니다.</p><div class="btns"><button class="btn ghost" onclick="closeSheet()">나중에</button><button class="btn" id="btn-place-now">배치하기</button></div>`);
       document.getElementById('btn-place-now').onclick = () => pickMonster('서당에 배치할 글몬', i => !i.atGym && i.hp > 0, inst => placeAtGym(B.g, rec, inst));
     } else {
       openSheet(`<h3>패배…</h3><p>글몬들이 지쳤어요. 약초와 부활초로 회복한 뒤 다시 도전하세요.</p><div class="btns"><button class="btn" onclick="closeSheet()">확인</button></div>`);
     }
-    updateHud();
+    updateHud(); if (netOn()) syncProfile().catch(() => {});
   }, 900);
 }
 // 입력: 탭 = 공격, 스와이프 = 회피
@@ -2103,7 +2231,86 @@ let bDown = null;
 bStage.addEventListener('pointerdown', e => { bDown = { x: e.clientX, y: e.clientY }; });
 bStage.addEventListener('pointerup', e => { if (!bDown) return; const dx = e.clientX - bDown.x; bDown = null; if (Math.abs(dx) > 40) dodge(dx > 0 ? -1 : 1); else myAttack(false); });
 document.getElementById('b-charged').addEventListener('click', () => myAttack(true));
-document.getElementById('b-flee').addEventListener('click', () => { B.active = false; cancelAnimationFrame(B.raf); bEl.classList.remove('active'); save(); updateHud(); });
+document.getElementById('b-flee').addEventListener('click', () => { if (B.mode === 'pvp') { pvpLeave(); B.mode = 'gym'; return; } B.active = false; cancelAnimationFrame(B.raf); bEl.classList.remove('active'); save(); updateHud(); });
+
+// =====================================================================
+//  모션 배틀: 폰을 흔들어 차지 기술 발동 · 기울여서 회피
+//  가속도(devicemotion) + 방향(deviceorientation, ORI.raw.gamma) 사용
+// =====================================================================
+const MOTION = {
+  on: false,            // 리스너 붙음
+  have: false,          // 실제 센서 값이 들어옴
+  lastShake: 0, count: 0, windowEnd: 0, windowStart: 0,   // 흔들기 창
+  baseGamma: null, tiltArmed: false, lastTiltHint: 0,
+  peak: 0,
+};
+const SHAKE_G = 13;               // m/s² — 이보다 크면 한 번 흔든 것으로
+const SHAKE_GAP = 130;            // ms — 연속 감지 최소 간격
+const SHAKE_WINDOW = 1200;        // ms — 첫 흔들기부터 발동까지
+const TILT_ON = 24, TILT_OFF = 10; // deg — 회피 발동/해제 (히스테리시스)
+
+function motionEnabled() { return S.settings.motion !== false; }
+
+function onMotion(e) {
+  let a = e.acceleration;
+  // 중력 제외 값이 없는 기기: 중력 포함 값에서 9.8을 뺀 근사
+  if (!a || (a.x == null && a.y == null && a.z == null)) { const g = e.accelerationIncludingGravity; if (!g) return; const mag = Math.hypot(g.x || 0, g.y || 0, g.z || 0); MOTION.have = true; return registerAccel(Math.abs(mag - 9.81)); }
+  MOTION.have = true;
+  registerAccel(Math.hypot(a.x || 0, a.y || 0, a.z || 0));
+}
+function registerAccel(mag) {
+  if (!B.active || B.won != null || !motionEnabled()) return;
+  const now = performance.now();
+  if (mag < SHAKE_G || now - MOTION.lastShake < SHAKE_GAP) return;
+  MOTION.lastShake = now;
+  const m = me(); if (!m) return;
+  const ch = MOVES[m.charged];
+  if (B.energy < ch.energy) { if (now - MOTION.lastTiltHint > 1500) { MOTION.lastTiltHint = now; floatText('에너지가 아직 부족!', bW * 0.5, bH * 0.6, '#97a5b2'); } return; }
+  if (!MOTION.windowEnd || now > MOTION.windowEnd) { MOTION.windowStart = now; MOTION.windowEnd = now + SHAKE_WINDOW; MOTION.count = 0; MOTION.peak = 0; }
+  MOTION.count++; MOTION.peak = Math.max(MOTION.peak, mag);
+  updateShakeMeter();
+}
+function shakeMult(count) { return Math.min(1.5, 1 + count * 0.07); }
+function updateShakeMeter() {
+  const el = document.getElementById('b-shake'); if (!el) return;
+  const active = MOTION.windowEnd && performance.now() < MOTION.windowEnd;
+  el.hidden = !active; if (!active) return;
+  const mult = shakeMult(MOTION.count);
+  el.querySelector('i').style.width = Math.min(100, (mult - 1) / 0.5 * 100) + '%';
+  document.getElementById('b-shake-t').textContent = `흔드는 중… ×${mult.toFixed(2)}`;
+}
+// 매 프레임 호출 (battleLoop)
+function motionTick(now) {
+  if (!B.active || !motionEnabled()) return;
+  // 흔들기 창 종료 → 발동
+  if (MOTION.windowEnd && now > MOTION.windowEnd) {
+    const count = MOTION.count; MOTION.windowEnd = 0; MOTION.count = 0; updateShakeMeter();
+    if (count > 0 && B.won == null) { const mult = shakeMult(count); myAttack(true, mult); }
+  }
+  // 기울여 회피
+  if (ORI.raw && ORI.raw.gamma != null) {
+    const g = ORI.raw.gamma;
+    if (MOTION.baseGamma == null) MOTION.baseGamma = g;
+    const d = g - MOTION.baseGamma;
+    if (!MOTION.tiltArmed && Math.abs(d) > TILT_ON) { MOTION.tiltArmed = true; dodge(d > 0 ? 1 : -1); }
+    else if (MOTION.tiltArmed && Math.abs(d) < TILT_OFF) MOTION.tiltArmed = false;
+  }
+}
+function motionBattleStart() {
+  MOTION.windowEnd = 0; MOTION.count = 0; MOTION.tiltArmed = false;
+  MOTION.baseGamma = ORI.raw && ORI.raw.gamma != null ? ORI.raw.gamma : null;   // 지금 쥔 각도를 기준으로
+  updateShakeMeter();
+  const hint = document.querySelector('.b-hint'); if (hint) hint.textContent = motionEnabled() && (MOTION.have || ORI.have) ? '탭: 공격 · 폰 흔들기: 차지 기술 · 좌우로 기울이기: 회피' : '탭: 공격 · 좌우 스와이프: 회피';
+}
+async function startMotion() {
+  if (MOTION.on) return true;
+  if (typeof DeviceMotionEvent === 'undefined') return false;
+  if (typeof DeviceMotionEvent.requestPermission === 'function') {   // iOS
+    try { const r = await DeviceMotionEvent.requestPermission(); if (r !== 'granted') return false; } catch (e) { return false; }
+  }
+  window.addEventListener('devicemotion', onMotion, true); MOTION.on = true;
+  return true;
+}
 
 // =====================================================================
 //  UI 코어: HUD · 메뉴 · 오버레이 · 시트 · 결과 · 큐
@@ -2169,7 +2376,7 @@ function openOverlay(name) {
   for (const o of document.querySelectorAll('.overlay')) o.classList.remove('show');
   el.classList.add('show'); $('#btn-ov-close').hidden = false;
   if (!ovStack.includes(name)) ovStack.push(name);
-  const r = { mons: renderMons, dex: renderDex, bag: renderBag, shop: renderShop, eggs: renderEggs, me: renderMe }[name]; if (r) r();
+  const r = { mons: renderMons, dex: renderDex, bag: renderBag, shop: renderShop, eggs: renderEggs, me: renderMe, online: renderOnline }[name]; if (r) r();
   el.querySelector('.ov-body').scrollTop = 0;
 }
 function closeOverlay() {
@@ -2479,7 +2686,9 @@ function renderMe() {
     <div class="section-title">메달</div><div class="medal-grid" id="medals"></div>
     <div class="section-title">일지</div><div class="journal" id="journal"></div>
     <div class="section-title">설정</div><div class="list">
+      <div class="item"><div>서버 연결 <span>· ${netStatusText()}${netOn() ? ' · 내 코드 ' + ON.myCode : ''}</span></div><button class="btn ghost sm" id="btn-set-server">설정</button></div>
       <div class="item"><div>AR 모드 <span>· 포획 때 카메라 사용</span></div><button class="btn ghost sm" id="btn-set-ar">${S.settings.ar ? '켜짐' : '꺼짐'}</button></div>
+      <div class="item"><div>모션 배틀 <span>· 폰을 흔들어 차지 기술(최대 ×1.5), 기울여서 회피${MOTION.have ? '' : ' · 센서 대기 중'}</span></div><button class="btn ghost sm" id="btn-set-motion">${S.settings.motion !== false ? '켜짐' : '꺼짐'}</button></div>
       <div class="item" id="perm-cam"><div>카메라 <span id="perm-cam-s">${perm.cam == null ? '확인 안 됨' : perm.cam ? '허용됨' : '허용 안 됨'}</span></div><button class="btn ghost sm" data-perm="cam">허용</button></div>
       <div class="item" id="perm-geo"><div>위치 <span id="perm-geo-s">${perm.geo == null ? '확인 안 됨' : perm.geo ? '허용됨' : '허용 안 됨'}</span></div><button class="btn ghost sm" data-perm="geo">허용</button></div>
       <div class="item" id="perm-ori"><div>방향 센서 <span id="perm-ori-s">${perm.ori == null ? '확인 안 됨' : perm.ori ? '허용됨' : '허용 안 됨'}</span></div><button class="btn ghost sm" data-perm="ori">허용</button></div>
@@ -2491,8 +2700,10 @@ function renderMe() {
   for (const md of MEDALS) { const t = medalTier(md); const v = md.stat === 'dex' ? dexCaughtCount() : stat(md.stat); const next = t < 3 ? md.tiers[t] : null; const d = document.createElement('div'); d.className = 'medal'; d.innerHTML = `<div class="ic t${t}">${MEDAL_TIER_NAME[t] || '·'}</div><div class="nm">${md.name}</div><div class="pr">${md.stat === 'km' ? v.toFixed(1) : Math.floor(v)}${next ? ' / ' + next : ''} ${md.unit}</div>`; d.onclick = () => openSheet(`<h3>${md.name} <span class="tag r${t}">${MEDAL_TIER_NAME[t] ? MEDAL_TIER_NAME[t] + '메달' : '미획득'}</span></h3><p>${md.desc}: <b>${md.stat === 'km' ? v.toFixed(1) : Math.floor(v)} ${md.unit}</b></p><p class="sub">동 ${md.tiers[0]} · 은 ${md.tiers[1]} · 금 ${md.tiers[2]}${md.type ? ` · 이 타입 포획률 +${Math.round((MEDAL_CATCH_BONUS[t] - 1) * 100)}%` : ''}</p><div class="btns"><button class="btn ghost" onclick="closeSheet()">닫기</button></div>`); mg.appendChild(d); }
   const jl = $('#journal'); if (!S.journal.length) jl.innerHTML = '<div class="empty">아직 기록이 없어요.</div>';
   for (const j of S.journal.slice(0, 25)) { const d = document.createElement('div'); d.className = 'j'; if (MON[j.icon]) d.appendChild(monsterIcon(MON[j.icon], 32)); else if (ITEM_ICON[j.icon]) d.appendChild(itemIcon(j.icon, 32)); else { const [c, cx] = makeCanvas(32); cx.scale(0.32, 0.32); drawGymIcon(cx, S.team ? TEAMS[S.team].color : '#888'); d.appendChild(c); } d.insertAdjacentHTML('beforeend', `<div>${j.text}</div><span>${new Date(j.t).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>`); jl.appendChild(d); }
-  $('#btn-me-name').onclick = () => promptSheet('트레이너 이름', S.name, v => { S.name = v; save(); renderMe(); });
+  $('#btn-me-name').onclick = () => promptSheet('트레이너 이름', S.name, v => { S.name = v; save(); renderMe(); if (netOn()) syncProfile().catch(() => {}); });
   $('#btn-set-ar').onclick = () => { S.settings.ar = !S.settings.ar; save(); renderMe(); };
+  $('#btn-set-motion').onclick = () => { S.settings.motion = S.settings.motion === false; save(); if (S.settings.motion) startMotion().catch(() => {}); renderMe(); };
+  $('#btn-set-server').onclick = openServerSetup;
   const bt = $('#btn-set-team'); if (bt) bt.onclick = openTeamSelect;
   for (const b of body.querySelectorAll('[data-perm]')) b.addEventListener('click', async () => { const k = b.dataset.perm; if (k === 'geo') startGeo(); if (k === 'cam') { const ok = await startCamera(); if (ok) stopCamera(); } if (k === 'ori') await startOrientation(); setTimeout(renderMe, 800); });
   $('#btn-reset').onclick = () => confirmSheet('정말 초기화할까요?', '글몬, 도감, 레벨, 아이템이 모두 처음으로 돌아갑니다.', '초기화', () => { const name = S.name; S = defaultSave(); S.welcomed = true; S.name = name; save(); closeAllOverlays(); updateHud(); onPositionChanged(); }, true);
@@ -2533,15 +2744,642 @@ function spinStop(st) {
   openSheet(html); for (const el of sheet.querySelectorAll('[data-item]')) el.prepend(itemIcon(el.dataset.item, 28));
 }
 
+// =====================================================================
+//  네트워크 계층 — Firebase Realtime Database REST + SSE
+//  SDK 없이 fetch / EventSource 만 사용. 설정이 없으면 완전 오프라인으로 동작.
+// =====================================================================
+
+
+const NET = {
+  cfg: null, uid: null, token: null, refresh: null, expAt: 0,
+  state: 'off',           // off | connecting | on | error
+  error: '', streams: {}, listeners: {}, lastPing: 0, retry: 0, blocked: false,
+};
+
+function netCfg() {
+  try { const raw = localStorage.getItem('geulmon.server'); if (raw) { const c = JSON.parse(raw); if (c && c.apiKey && c.databaseURL) return c; } } catch (e) {}
+  if (SERVER_CONFIG.apiKey && SERVER_CONFIG.databaseURL) return Object.assign({}, SERVER_CONFIG);
+  return null;
+}
+function netSaveCfg(c) { try { localStorage.setItem('geulmon.server', JSON.stringify(c)); } catch (e) {} }
+function netClearCfg() { try { localStorage.removeItem('geulmon.server'); } catch (e) {} }
+function netOn() { return NET.state === 'on'; }
+function netRoot() { return `${NET.cfg.databaseURL.replace(/\/$/, '')}/g/${encodeURIComponent(NET.cfg.group || 'yujung')}`; }
+function netUrl(path, extra) { return `${netRoot()}${path ? '/' + path : ''}.json?auth=${encodeURIComponent(NET.token)}${extra || ''}`; }
+
+// 붙여넣은 텍스트에서 설정 뽑아내기 (JSON이든 firebaseConfig 코드든)
+function parseServerConfig(text) {
+  const out = {};
+  const pick = k => { const m = text.match(new RegExp('["\']?' + k + '["\']?\\s*[:=]\\s*["\']([^"\']+)["\']')); return m ? m[1] : ''; };
+  out.apiKey = pick('apiKey');
+  out.databaseURL = pick('databaseURL');
+  if (!out.databaseURL) { const m = text.match(/https:\/\/[a-z0-9-]+(?:-default-rtdb)?[a-z0-9.-]*\.(?:firebaseio\.com|firebasedatabase\.app)/i); if (m) out.databaseURL = m[0]; }
+  const g = pick('group'); if (g) out.group = g;
+  return (out.apiKey && out.databaseURL) ? out : null;
+}
+
+// ---- 인증 ----
+async function netAuth() {
+  const c = NET.cfg;
+  const r = await fetch(`${c.authBase || 'https://identitytoolkit.googleapis.com'}/v1/accounts:signUp?key=${encodeURIComponent(c.apiKey)}`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ returnSecureToken: true }),
+  });
+  const j = await r.json();
+  if (!r.ok) throw new Error((j.error && j.error.message) || '로그인 실패');
+  NET.uid = j.localId; NET.token = j.idToken; NET.refresh = j.refreshToken; NET.expAt = Date.now() + (+j.expiresIn - 120) * 1000;
+  try { localStorage.setItem('geulmon.uid', JSON.stringify({ uid: j.localId, refresh: j.refreshToken })); } catch (e) {}
+}
+async function netRefresh() {
+  const c = NET.cfg;
+  const body = new URLSearchParams({ grant_type: 'refresh_token', refresh_token: NET.refresh });
+  const r = await fetch(`${c.tokenBase || 'https://securetoken.googleapis.com'}/v1/token?key=${encodeURIComponent(c.apiKey)}`, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body });
+  const j = await r.json();
+  if (!r.ok) throw new Error((j.error && j.error.message) || '토큰 갱신 실패');
+  NET.token = j.id_token || j.access_token; NET.refresh = j.refresh_token || NET.refresh; NET.uid = j.user_id || NET.uid;
+  NET.expAt = Date.now() + (+(j.expires_in || 3000) - 120) * 1000;
+  try { localStorage.setItem('geulmon.uid', JSON.stringify({ uid: NET.uid, refresh: NET.refresh })); } catch (e) {}
+}
+async function netEnsureToken() { if (Date.now() > NET.expAt) { if (NET.refresh) await netRefresh(); else await netAuth(); restartStreams(); } }
+
+// ---- 연결 ----
+async function netConnect(silent) {
+  const c = netCfg();
+  if (!c) { NET.state = 'off'; NET.error = ''; updateNetBadge(); return false; }
+  NET.cfg = c; NET.state = 'connecting'; NET.error = ''; updateNetBadge();
+  try {
+    let saved = null; try { saved = JSON.parse(localStorage.getItem('geulmon.uid') || 'null'); } catch (e) {}
+    if (saved && saved.refresh) { NET.refresh = saved.refresh; NET.uid = saved.uid; await netRefresh(); }
+    else await netAuth();
+    await netPut('players/' + NET.uid + '/hello', Date.now());   // 쓰기 권한 확인
+    NET.state = 'on'; NET.retry = 0; NET.blocked = false;
+    onNetUp();
+    if (!silent) toast('서버에 연결됐어요');
+  } catch (e) {
+    NET.state = 'error';
+    NET.error = String(e && e.message || e);
+    if (/Failed to fetch|NetworkError|Load failed/i.test(NET.error)) { NET.blocked = true; NET.error = '서버에 연결할 수 없어요 (인터넷 또는 보안 정책)'; }
+    if (/PERMISSION_DENIED/i.test(NET.error)) NET.error = '데이터베이스 규칙에서 쓰기가 막혀 있어요';
+    if (/API_KEY|CONFIGURATION|INVALID/i.test(NET.error)) NET.error = '설정값(apiKey)이 올바르지 않아요';
+    if (/ADMIN_ONLY_OPERATION|OPERATION_NOT_ALLOWED/i.test(NET.error)) NET.error = 'Firebase에서 익명 로그인을 켜 주세요';
+  }
+  updateNetBadge();
+  return NET.state === 'on';
+}
+
+// ---- REST ----
+async function netReq(method, path, data, extra) {
+  await netEnsureToken();
+  const opt = { method };
+  if (data !== undefined) { opt.headers = { 'Content-Type': 'application/json' }; opt.body = JSON.stringify(data); }
+  const r = await fetch(netUrl(path, extra), opt);
+  if (!r.ok) { const t = await r.text().catch(() => ''); throw new Error(`${r.status} ${t.slice(0, 120)}`); }
+  const txt = await r.text();
+  return txt && txt !== 'null' ? JSON.parse(txt) : null;
+}
+const netGet = (p, extra) => netReq('GET', p, undefined, extra);
+const netPut = (p, d) => netReq('PUT', p, d);
+const netPatch = (p, d) => netReq('PATCH', p, d);
+const netPush = (p, d) => netReq('POST', p, d);
+const netDel = p => netReq('DELETE', p);
+const SV_TS = { '.sv': 'timestamp' };
+
+// ---- 스트리밍 (SSE) ----
+// path의 변화를 실시간으로 받는다. cb(kind, path, data)
+function netStream(key, path, cb) {
+  netStopStream(key);
+  if (!netOn() || typeof EventSource === 'undefined') return;
+  let es;
+  try { es = new EventSource(netUrl(path)); } catch (e) { return; }
+  const rec = { es, path, cb, key };
+  NET.streams[key] = rec;
+  es.addEventListener('put', e => { try { const d = JSON.parse(e.data); cb('put', d.path, d.data); } catch (err) {} });
+  es.addEventListener('patch', e => { try { const d = JSON.parse(e.data); cb('patch', d.path, d.data); } catch (err) {} });
+  es.addEventListener('auth_revoked', () => { netStopStream(key); netEnsureToken().then(() => netStream(key, path, cb)).catch(() => {}); });
+  es.onerror = () => {
+    if (rec.dead) return;
+    // 브라우저가 자동 재연결하지만, 닫힌 경우 직접 재시도
+    if (es.readyState === 2) { rec.dead = true; setTimeout(() => { if (NET.streams[key] === rec) { delete NET.streams[key]; if (netOn()) netStream(key, path, cb); } }, 3000); }
+  };
+}
+function netStopStream(key) { const r = NET.streams[key]; if (r) { r.dead = true; try { r.es.close(); } catch (e) {} delete NET.streams[key]; } }
+function restartStreams() { const keys = Object.entries(NET.streams).map(([k, r]) => [k, r.path, r.cb]); for (const [k] of keys) netStopStream(k); for (const [k, p, cb] of keys) netStream(k, p, cb); }
+function netStopAll() { for (const k of Object.keys(NET.streams)) netStopStream(k); }
+
+// SSE의 put/patch 경로를 로컬 객체에 반영
+function applyStreamEvent(store, kind, path, data) {
+  if (path === '/') {
+    if (kind === 'put') { for (const k of Object.keys(store)) delete store[k]; Object.assign(store, data || {}); return; }
+    for (const [k, v] of Object.entries(data || {})) { const kp = k.split('/').filter(Boolean); let t = store; for (let i = 0; i < kp.length - 1; i++) { if (typeof t[kp[i]] !== 'object' || t[kp[i]] == null) t[kp[i]] = {}; t = t[kp[i]]; } if (v == null) delete t[kp[kp.length - 1]]; else t[kp[kp.length - 1]] = v; }
+    return;
+  }
+  const parts = path.split('/').filter(Boolean);
+  let o = store;
+  for (let i = 0; i < parts.length - 1; i++) { if (typeof o[parts[i]] !== 'object' || o[parts[i]] == null) o[parts[i]] = {}; o = o[parts[i]]; }
+  const last = parts[parts.length - 1];
+  if (kind === 'patch') {
+    if (typeof o[last] !== 'object' || o[last] == null) o[last] = {};
+    for (const [k, v] of Object.entries(data || {})) {
+      const kp = k.split('/').filter(Boolean); let t = o[last];
+      for (let i = 0; i < kp.length - 1; i++) { if (typeof t[kp[i]] !== 'object' || t[kp[i]] == null) t[kp[i]] = {}; t = t[kp[i]]; }
+      if (v == null) delete t[kp[kp.length - 1]]; else t[kp[kp.length - 1]] = v;
+    }
+  }
+  else if (data == null) delete o[last];
+  else o[last] = data;
+}
+
+function netStatusText() {
+  if (NET.state === 'on') return '연결됨';
+  if (NET.state === 'connecting') return '연결 중…';
+  if (NET.state === 'error') return NET.error || '연결 실패';
+  return '설정 안 됨';
+}
+
+// =====================================================================
+//  온라인 기능: 프로필 동기화 · 랭킹 · 친구 · 교환 · 공유 서당
+// =====================================================================
+// 데이터 구조
+//   pub/…    모두가 항상 구독하는 공개 데이터 (프로필·서당·쪽지) — 작고 드물게 바뀜
+//   rooms/…  대전 방 — 참가자 2명만 구독
+//   trades/… 교환 — 참가자 2명만 구독
+//   codes/…  친구 코드 → uid (조회만, 구독 안 함)
+// 이렇게 나눠야 배틀 중 오가는 데이터가 접속자 전원에게 방송되지 않는다.
+const ON = { pub: {}, myCode: '', lastSync: 0, gymStreamOn: false, inbox: {}, room: null, tradeDoc: null };
+Object.defineProperties(ON, {
+  players: { get() { return ON.pub.players || {}; } },
+  gyms: { get() { return ON.pub.gyms || {}; } },
+  trade: { get() { return ON.tradeDoc; }, set(v) { ON.tradeDoc = v; } },
+});
+function onPubEvent(kind, path, data) {
+  applyStreamEvent(ON.pub, kind, path, data);
+  ON.gymStreamOn = true;
+  const top = path === '/' ? '*' : path.split('/')[1];
+  if (top === '*' || top === 'players') { if ($('#ov-online').classList.contains('show')) renderOnlineTab(); updateNetBadge(); }
+  if (top === '*' || top === 'gyms') checkMyGymReturns();
+  if (top === '*' || top === 'inbox') { ON.inbox = (ON.pub.inbox || {})[NET.uid] || {}; handleInbox(); }
+}
+function onTradeEvent(kind, path, data) {
+  if (!ON.tradeCode) return;
+  if (path === '/' && kind === 'put') ON.tradeDoc = data; else { ON.tradeDoc = ON.tradeDoc || {}; applyStreamEvent(ON.tradeDoc, kind, path, data); }
+  const t = ON.tradeDoc; if (!t) return;
+  renderTradeSheet(); if (t.state === 'done') completeTrade();
+}
+
+function friendCodeOf(uid) { const h = hash32(uid + ':geulmon'); let s = ''; const A = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; let v = h; for (let i = 0; i < 6; i++) { s += A[v % A.length]; v = Math.floor(v / A.length) + (i * 7919); } return s; }
+
+// 내 글몬 → 서버용 스냅샷 (필요한 필드만)
+function monSnap(i) { return { uid: i.uid, id: i.id, level: i.level, iv: i.iv, fast: i.fast, charged: i.charged, nick: i.nick || '', cp: instCP(i), ownerUid: NET.uid, ownerName: S.name || '트레이너' }; }
+function snapToInst(s, extra) { const inst = makeInstance(s.id, s.level, s.iv, Object.assign({ fast: s.fast, charged: s.charged, nick: s.nick || '' }, extra || {})); inst.uid = s.uid || inst.uid; inst.owner = s.ownerName; inst.ownerUid = s.ownerUid; inst.hp = instMaxHP(inst); return inst; }
+
+// ---- 연결 후 ----
+async function onNetUp() {
+  ON.myCode = friendCodeOf(NET.uid);
+  S.friends = S.friends || []; S.pvp = S.pvp || { wins: 0, losses: 0 }; S.tradesDone = S.tradesDone || {};
+  try {
+    await syncProfile();
+    await netPut('codes/' + ON.myCode, NET.uid);
+    netStream('pub', 'pub', onPubEvent);
+  } catch (e) { console.warn('online init', e); }
+  updateHud();
+}
+async function syncProfile() {
+  if (!netOn()) return;
+  const doc = { name: S.name || '트레이너', team: S.team || null, level: S.level, xp: totalXp(), dex: dexCaughtCount(), catches: stat('catches'), wins: stat('wins'), pvpWins: (S.pvp && S.pvp.wins) || 0, pvpLosses: (S.pvp && S.pvp.losses) || 0, km: Math.round(stat('km') * 10) / 10, code: ON.myCode, ts: SV_TS };
+  const b = S.buddy && getMonster(S.buddy.uid); if (b) doc.buddy = b.id;
+  await netPatch('pub/players/' + NET.uid, doc); ON.lastSync = Date.now();
+}
+function totalXp() { let x = 0; for (let l = 1; l < S.level; l++) x += LEVEL_XP[l]; return x + S.xp; }
+
+// ---- 랭킹 ----
+function leaderboard(key) {
+  const list = Object.entries(ON.players).map(([uid, p]) => Object.assign({ uid }, p)).filter(p => p && p.name);
+  const v = p => key === 'xp' ? (p.xp || 0) : key === 'dex' ? (p.dex || 0) : key === 'catches' ? (p.catches || 0) : key === 'pvp' ? (p.pvpWins || 0) : (p.wins || 0);
+  list.sort((a, b) => v(b) - v(a)); return { list, v };
+}
+
+// ---- 친구 ----
+async function addFriendByCode(code) {
+  code = (code || '').trim().toUpperCase(); if (code.length < 6) { toast('코드 6자리를 입력하세요'); return; }
+  if (code === ON.myCode) { toast('내 코드예요'); return; }
+  try {
+    const uid = await netGet('codes/' + code); if (!uid) { toast('그 코드의 트레이너가 없어요'); return; }
+    if (!S.friends.includes(uid)) { S.friends.push(uid); save(); }
+    await netPut(`pub/inbox/${uid}/friend/${NET.uid}`, { name: S.name || '트레이너', t: SV_TS });
+    toast('친구로 등록했어요'); renderOnlineTab();
+  } catch (e) { toast('연결 오류: ' + e.message); }
+}
+function handleInbox() {
+  const ib = ON.inbox || {};
+  for (const [uid, req] of Object.entries(ib.friend || {})) { if (!S.friends.includes(uid)) { S.friends.push(uid); save(); toast(`${req.name || '누군가'}님이 친구로 등록했어요`); } netDel(`pub/inbox/${NET.uid}/friend/${uid}`).catch(() => {}); }
+  for (const [code, inv] of Object.entries(ib.pvp || {})) { if (!PVP.active && !PVP.pendingInvite) { PVP.pendingInvite = { code, from: inv.name }; offerPvpInvite(inv.name, code); } }
+}
+
+// ---- 교환 ----
+async function createTrade(inst) {
+  const code = String(1000 + Math.floor(Math.random() * 9000));
+  await netPut('trades/' + code, { a: { uid: NET.uid, name: S.name || '트레이너', mon: monSnap(inst) }, state: 'open', t: SV_TS });
+  ON.tradeCode = code; ON.tradeSide = 'a'; ON.tradeMon = inst.uid;
+  watchTrade(code);
+  return code;
+}
+async function joinTrade(code, inst) {
+  const doc = await netGet('trades/' + code);
+  if (!doc || doc.state !== 'open') { toast('그 번호의 교환이 없어요'); return false; }
+  if (doc.a.uid === NET.uid) { toast('내가 만든 교환이에요'); return false; }
+  await netPatch('trades/' + code, { b: { uid: NET.uid, name: S.name || '트레이너', mon: monSnap(inst) }, state: 'both' });
+  ON.tradeCode = code; ON.tradeSide = 'b'; ON.tradeMon = inst.uid;
+  watchTrade(code); return true;
+}
+function watchTrade(code) { ON.tradeDoc = null; netStream('trade', 'trades/' + code, onTradeEvent); }
+async function confirmTrade() { const code = ON.tradeCode; if (!code) return; const t = ON.trade; const key = ON.tradeSide + 'Ok'; const patch = {}; patch[key] = true; const otherOk = t[(ON.tradeSide === 'a' ? 'b' : 'a') + 'Ok']; if (otherOk) patch.state = 'done'; await netPatch('trades/' + code, patch); }
+async function cancelTrade() { const code = ON.tradeCode; netStopStream('trade'); if (code && ON.trade && ON.trade.state !== 'done') { try { await netPatch('trades/' + code, { state: 'cancel' }); } catch (e) {} } ON.tradeCode = null; closeSheet(); }
+function completeTrade() {
+  const t = ON.trade, code = ON.tradeCode; if (!t || !code || S.tradesDone[code]) return;
+  const mine = ON.tradeSide === 'a' ? t.a : t.b, theirs = ON.tradeSide === 'a' ? t.b : t.a;
+  if (!mine || !theirs || !theirs.mon) return;
+  S.tradesDone[code] = true;
+  const idx = S.monsters.findIndex(m => m.uid === mine.mon.uid);
+  if (idx >= 0) { const gone = S.monsters[idx]; if (S.buddy && S.buddy.uid === gone.uid) S.buddy = null; S.monsters.splice(idx, 1); }
+  const got = snapToInst(theirs.mon, { traded: true, caughtAt: Date.now() }); got.uid = 'tr' + Date.now().toString(36); got.owner = undefined; got.ownerUid = undefined;
+  addMonster(got); addCandy(MON[got.id].family, 1); addStat('trades'); journal(`${theirs.name}님과 ${MON[got.id].name}을(를) 교환했다`, got.id); save();
+  ON.tradeCode = null; netStopStream('trade');
+  closeSheet(); openSheet(`<div class="art" id="sheet-art"></div><h3>교환 완료!</h3><p>${theirs.name}님에게서 <b>${MON[got.id].name}</b> <span class="cp">CP ${instCP(got)}</span>을(를) 받았어요. 사탕 +1</p><div class="btns"><button class="btn" onclick="closeSheet()">확인</button></div>`);
+  $('#sheet-art').appendChild(monsterIcon(MON[got.id], 140, { caught: true })); updateHud();
+}
+function renderTradeSheet() {
+  const t = ON.trade; if (!t || !ON.tradeCode) return;
+  if (t.state === 'cancel') { ON.tradeCode = null; netStopStream('trade'); closeSheet(); toast('교환이 취소됐어요'); return; }
+  if (t.state === 'done') return;
+  const mine = ON.tradeSide === 'a' ? t.a : t.b, theirs = ON.tradeSide === 'a' ? t.b : t.a;
+  const myOk = t[ON.tradeSide + 'Ok'], theirOk = t[(ON.tradeSide === 'a' ? 'b' : 'a') + 'Ok'];
+  let html = `<h3>교환 <span class="cp">${ON.tradeCode}</span></h3><p class="sub">${theirs ? '서로 확인을 누르면 교환됩니다' : '상대가 이 번호로 참가하기를 기다리는 중…'}</p>
+    <div class="trade-row"><div class="side"><div class="lbl">내가 주는 글몬</div><div class="ic" data-mon="${mine.mon.id}"></div><div>${mine.mon.nick || MON[mine.mon.id].name}</div><div class="cp">CP ${mine.mon.cp}</div>${myOk ? '<div class="ok">확인함</div>' : ''}</div>
+    <div class="arrow">⇄</div>
+    <div class="side">${theirs ? `<div class="lbl">${theirs.name}님이 주는 글몬</div><div class="ic" data-mon="${theirs.mon.id}"></div><div>${theirs.mon.nick || MON[theirs.mon.id].name}</div><div class="cp">CP ${theirs.mon.cp}</div>${theirOk ? '<div class="ok">확인함</div>' : ''}` : '<div class="lbl">기다리는 중</div><div class="empty">…</div>'}</div></div>
+    <div class="btns"><button class="btn ghost" id="btn-trade-cancel">취소</button>${theirs && !myOk ? '<button class="btn" id="btn-trade-ok">교환 확인</button>' : ''}</div>`;
+  openSheet(html); for (const el of sheet.querySelectorAll('[data-mon]')) el.appendChild(monsterIcon(MON[el.dataset.mon], 72));
+  $('#btn-trade-cancel').onclick = cancelTrade; const ok = $('#btn-trade-ok'); if (ok) ok.onclick = confirmTrade;
+}
+
+// ---- 공유 서당 ----
+// 온라인이면 서버의 서당 문서가 우선. 없으면 NPC.
+function onlineGym(g) {
+  const d = ON.gyms[g.key]; if (!d) return null;
+  const defenders = Object.values(d.defenders || {}).map(s => snapToInst(s));
+  const mineHere = defenders.some(x => x.ownerUid === NET.uid);
+  return { team: d.team, defenders, owner: mineHere ? 'me' : 'online', since: d.since || 0, name: g.name, online: true, raw: d };
+}
+async function placeAtGymOnline(g, gs, inst) {
+  const snap = monSnap(inst); snap.placedAt = Date.now();
+  await netPatch(`pub/gyms/${g.key}`, { team: S.team, name: g.name, since: gs.raw && gs.raw.since ? gs.raw.since : SV_TS });
+  await netPut(`pub/gyms/${g.key}/defenders/${inst.uid}`, snap);
+  inst.atGym = g.key; inst.atGymOnline = true; inst.placedAt = snap.placedAt; save();
+}
+async function takeGymOnline(g) {
+  // 승리: 이전 수비수들은 주인에게 돌아감 (주인이 다음 접속 때 감지)
+  await netPut(`pub/gyms/${g.key}`, { team: S.team, name: g.name, since: SV_TS, defenders: null, takenBy: NET.uid, takenAt: SV_TS });
+}
+function checkMyGymReturns() {
+  // 서당에 두었던 내 글몬이 서버에서 사라졌으면 → 돌아온 것 (엽전 지급)
+  let changed = false;
+  for (const inst of S.monsters) {
+    if (!inst.atGymOnline || !inst.atGym) continue;
+    const d = ON.gyms[inst.atGym];
+    const still = d && d.defenders && d.defenders[inst.uid];
+    if (still) continue;
+    const held = Date.now() - (inst.placedAt || Date.now());
+    const got = claimCoins(Math.min(COIN_DAY_CAP, Math.floor(held / 600000) * COIN_PER_10MIN));
+    delete inst.atGym; delete inst.atGymOnline; delete inst.placedAt; inst.hp = Math.max(1, Math.floor(instMaxHP(inst) * 0.5));
+    journal(`${instName(inst)}이(가) 서당에서 돌아왔다 · 엽전 ${got}개`, 'coin'); toast(`${instName(inst)}이(가) 서당에서 돌아왔어요 · 엽전 ${got}개`, 2500); changed = true;
+  }
+  if (changed) { save(); updateHud(); }
+}
+
+// =====================================================================
+//  1:1 실시간 대전 (온라인)
+// =====================================================================
+const PVP = { active: false, code: null, side: null, myMons: [], oppMons: [], oppUid: null, oppName: '', applied: {}, hbTimer: 0, timerEnd: 0, pendingInvite: null, finished: false, myIdx: 0 };
+Object.defineProperty(PVP, 'room', { get() { return PVP.doc; }, set(v) { PVP.doc = v; } });
+function onRoomEvent(kind, path, data) {
+  if (!PVP.active) return;
+  if (path === '/' && kind === 'put') PVP.doc = data; else { PVP.doc = PVP.doc || {}; applyStreamEvent(PVP.doc, kind, path, data); }
+  onRoomChange(path);
+}
+const PVP_TIME = 180000;
+
+function pvpMe() { return (PVP.room || {})[PVP.side] || {}; }
+function pvpOppSide() { return PVP.side === 'host' ? 'guest' : 'host'; }
+function pvpOpp() { return (PVP.room || {})[pvpOppSide()] || null; }
+
+async function pvpCreate() {
+  if (!netOn()) { toast('서버에 연결되어 있지 않아요'); return; }
+  const code = String(1000 + Math.floor(Math.random() * 9000));
+  const doc = { host: { uid: NET.uid, name: S.name || '트레이너', team: S.team || null, level: S.level }, state: 'wait', t: Date.now() };
+  await netPut('rooms/' + code, Object.assign({}, doc, { t: SV_TS }));
+  pvpEnterRoom(code, 'host', doc);
+}
+async function pvpJoin(code) {
+  code = (code || '').trim(); if (!/^\d{4}$/.test(code)) { toast('4자리 숫자 코드를 입력하세요'); return; }
+  const r = await netGet('rooms/' + code);
+  if (!r || r.state !== 'wait' || r.guest) { toast('참가할 수 없는 방이에요'); return; }
+  if (r.host && r.host.uid === NET.uid) { toast('내가 만든 방이에요'); return; }
+  const guest = { uid: NET.uid, name: S.name || '트레이너', team: S.team || null, level: S.level };
+  await netPatch('rooms/' + code, { guest, state: 'pick' });
+  pvpEnterRoom(code, 'guest', Object.assign({}, r, { guest, state: 'pick' }));
+}
+async function pvpQuick() {
+  if (!netOn()) { toast('서버에 연결되어 있지 않아요'); return; }
+  const rooms = await netGet('rooms', '&orderBy="state"&equalTo="wait"&limitToLast=10') || {};
+  const now = Date.now();
+  const open = Object.entries(rooms).filter(([c, r]) => r.host && r.host.uid !== NET.uid && !r.guest && (!r.t || now - r.t < 10 * 60000));
+  if (open.length) return pvpJoin(open[0][0]);
+  toast('기다리는 방이 없어 새 방을 만들어요'); return pvpCreate();
+}
+async function pvpInvite(uid) {
+  if (!netOn()) return; const code = String(1000 + Math.floor(Math.random() * 9000));
+  const doc = { host: { uid: NET.uid, name: S.name || '트레이너', team: S.team || null, level: S.level }, state: 'wait', t: Date.now() };
+  await netPut('rooms/' + code, Object.assign({}, doc, { t: SV_TS }));
+  await netPut(`pub/inbox/${uid}/pvp/${code}`, { name: S.name || '트레이너', t: SV_TS });
+  pvpEnterRoom(code, 'host', doc);
+}
+function offerPvpInvite(name, code) {
+  openSheet(`<h3>대전 초대</h3><p>${name}님이 대전을 신청했어요. (방 ${code})</p><div class="btns"><button class="btn ghost" id="btn-inv-no">거절</button><button class="btn warm" id="btn-inv-ok">참가</button></div>`);
+  const clear = () => { netDel(`pub/inbox/${NET.uid}/pvp/${code}`).catch(() => {}); PVP.pendingInvite = null; };
+  $('#btn-inv-no').onclick = () => { clear(); closeSheet(); };
+  $('#btn-inv-ok').onclick = () => { clear(); closeSheet(); pvpJoin(code); };
+}
+
+function pvpEnterRoom(code, side, optimistic) {
+  PVP.doc = optimistic ? Object.assign({}, optimistic) : null;
+  PVP.code = code; PVP.side = side; PVP.applied = {}; PVP.finished = false; PVP.active = true; PVP.myMons = []; PVP.oppMons = [];
+  netStream('room', 'rooms/' + code, onRoomEvent);
+  renderRoomSheet();
+}
+function pvpLeave() {
+  netStopStream('room'); const code = PVP.code; const wasRun = PVP.room && PVP.room.state === 'run';
+  if (code && !PVP.finished) { if (wasRun) { netPatch(`rooms/${code}/result`, { [NET.uid]: 'forfeit' }).catch(() => {}); } else if (PVP.side === 'host') netDel('rooms/' + code).catch(() => {}); else netPatch('rooms/' + code, { guest: null, state: 'wait' }).catch(() => {}); }
+  PVP.active = false; PVP.code = null; PVP.doc = null; clearInterval(PVP.hbTimer);
+  if (B.active && B.mode === 'pvp') { B.active = false; cancelAnimationFrame(B.raf); bEl.classList.remove('active'); }
+  closeSheet();
+}
+
+// 방 상태 변화
+let roomSheetDirty = 0;
+function onRoomChange(path) {
+  const r = PVP.room; if (!PVP.active) return;
+  if (!r) { toast('방이 사라졌어요'); pvpLeave(); return; }
+  if (r.state === 'wait' && PVP.side === 'guest') { toast('상대가 나갔어요'); pvpLeave(); return; }
+  if (r.state === 'pick' || r.state === 'wait') { renderRoomSheet(); }
+  if (r.state === 'pick' && PVP.side === 'host' && r.ready && r.ready[r.host.uid] && r.guest && r.ready[r.guest.uid]) { netPatch('rooms/' + PVP.code, { state: 'run', startAt: SV_TS }).catch(() => {}); }
+  if (r.state === 'run' && !B.active && !PVP.finished) { startPvpBattle(); }
+  if (r.state === 'run' && B.active && B.mode === 'pvp') { pvpApplyNetwork(path); }
+  if (r.result && B.active && B.mode === 'pvp' && !PVP.finished) { const opp = pvpOpp(); if (opp && r.result[opp.uid] === 'forfeit') pvpFinish(true, '상대가 나갔어요'); }
+}
+
+// ---- 방 / 팀 선택 시트 ----
+function renderRoomSheet() {
+  const r = PVP.room; if (!PVP.active || !r) return;
+  if (B.active) return;
+  const me = pvpMe(), opp = pvpOpp();
+  const myMons = r.mons && r.mons[NET.uid]; const ready = r.ready || {};
+  let html = `<h3>대전 방 <span class="cp">${PVP.code}</span></h3>`;
+  html += `<p class="sub">${opp ? `상대: <b>${opp.name}</b> (Lv ${opp.level}${opp.team ? ', ' + TEAMS[opp.team].name + ' 팀' : ''})` : '상대에게 이 번호를 알려 주세요. 참가하면 자동으로 시작됩니다.'}</p>`;
+  html += `<div class="pvp-sides"><div class="pside"><div class="lbl">나</div><div class="mons" id="pvp-my"></div>${myMons ? (ready[NET.uid] ? '<div class="ok">준비 완료</div>' : '') : '<div class="sub">글몬 3마리를 고르세요</div>'}</div><div class="pside"><div class="lbl">${opp ? opp.name : '상대'}</div><div class="mons" id="pvp-opp"></div>${opp && r.mons && r.mons[opp.uid] ? (ready[opp.uid] ? '<div class="ok">준비 완료</div>' : '<div class="sub">고르는 중…</div>') : '<div class="sub">기다리는 중…</div>'}</div></div>`;
+  html += `<div class="btns"><button class="btn ghost" id="btn-room-leave">나가기</button>${opp && !myMons ? '<button class="btn warm" id="btn-room-pick">글몬 고르기</button>' : ''}</div>`;
+  openSheet(html);
+  const my = $('#pvp-my'); if (myMons) for (const s of myMons) my.appendChild(monsterIcon(MON[s.id], 44));
+  const op = $('#pvp-opp'); if (opp && r.mons && r.mons[opp.uid]) for (const s of r.mons[opp.uid]) op.appendChild(monsterIcon(MON[s.id], 44));
+  $('#btn-room-leave').onclick = pvpLeave;
+  const pb = $('#btn-room-pick'); if (pb) pb.onclick = pvpPickTeam;
+}
+function pvpPickTeam() {
+  const avail = S.monsters.filter(i => !i.atGym).sort((a, b) => instCP(b) - instCP(a));
+  if (avail.length < 1) { toast('글몬이 없어요'); return; }
+  const picked = avail.slice(0, 3).map(i => i.uid);
+  let html = `<h3>대전 팀 (3마리)</h3><p class="sub">체력은 대전 뒤에 원래대로 돌아옵니다.</p><div class="pick-grid">`;
+  for (const i of avail.slice(0, 40)) html += `<div class="pick ${picked.includes(i.uid) ? 'on' : ''}" data-uid="${i.uid}"><div class="ic" data-mon="${i.id}"></div><div class="cp">CP ${instCP(i)}</div></div>`;
+  html += `</div><div class="btns"><button class="btn ghost" id="btn-pick-back">뒤로</button><button class="btn warm" id="btn-pick-ok">준비 완료</button></div>`;
+  openSheet(html);
+  for (const el of sheet.querySelectorAll('[data-mon]')) el.appendChild(monsterIcon(MON[el.dataset.mon], 48));
+  for (const el of sheet.querySelectorAll('.pick')) el.onclick = () => { const u = el.dataset.uid; const k = picked.indexOf(u); if (k >= 0) picked.splice(k, 1); else if (picked.length < 3) picked.push(u); else return; el.classList.toggle('on', picked.includes(u)); };
+  $('#btn-pick-back').onclick = renderRoomSheet;
+  $('#btn-pick-ok').onclick = async () => { if (!picked.length) return; const snaps = picked.map(u => monSnap(getMonster(u))); await netPatch('rooms/' + PVP.code, { ['mons/' + NET.uid]: snaps, ['ready/' + NET.uid]: true }); renderRoomSheet(); };
+}
+
+// ---- 배틀 시작 ----
+function startPvpBattle() {
+  const r = PVP.room, opp = pvpOpp(); if (!opp || !r.mons || !r.mons[NET.uid] || !r.mons[opp.uid]) return;
+  closeSheet();
+  PVP.oppUid = opp.uid; PVP.oppName = opp.name;
+  PVP.myMons = r.mons[NET.uid].map(s => { const inst = getMonster(s.uid); const c = inst ? Object.assign({}, inst) : snapToInst(s); c.hp = instMaxHP(c); return c; });
+  PVP.oppMons = r.mons[opp.uid].map(s => snapToInst(s));
+  PVP.myIdx = 0; PVP.applied = {}; PVP.finished = false;
+  PVP.timerEnd = Date.now() + PVP_TIME;
+  B.mode = 'pvp'; B.active = true; B.g = null; B.gs = { defenders: PVP.oppMons, team: opp.team }; B.team = PVP.myMons; B.ti = 0; B.di = 0; B.energy = 0; B.dEnergy = 0; B.particles = []; B.log = []; B.won = null; B.t0 = performance.now();
+  B.defHp = PVP.oppMons.map(d => instMaxHP(d)); B.dTel = 0; B.dNext = 1e18;
+  bEl.classList.add('active'); resizeBattle(); renderBattleHud(); motionBattleStart();
+  pvpWriteLive(); clearInterval(PVP.hbTimer); PVP.hbTimer = setInterval(() => { if (B.active && B.mode === 'pvp') { pvpWriteLive(); pvpCheckOpp(); } }, 3000);
+  // 이미 도착해 있는 상대 움직임 처리
+  pvpApplyNetwork('/');
+  cancelAnimationFrame(B.raf); B.raf = requestAnimationFrame(battleLoop);
+  toast(`${opp.name}님과 대전 시작!`);
+}
+function pvpWriteLive() {
+  const m = B.team[B.ti]; if (!m) return;
+  netPatch(`rooms/${PVP.code}/live/${NET.uid}`, { i: B.ti, hp: m.hp, ko: B.team.every(t => t.hp <= 0), t: SV_TS }).catch(() => {});
+}
+function pvpSendMove(kind, moveId, x) { const doc = { k: kind, m: moveId, i: B.ti, t: SV_TS }; if (x && x > 1) doc.x = Math.round(x * 100) / 100; netPush(`rooms/${PVP.code}/moves/${NET.uid}`, doc).catch(() => {}); }
+
+// 상대의 움직임·상태 반영
+function pvpApplyNetwork(path) {
+  const r = PVP.room, opp = pvpOpp(); if (!opp) return;
+  const live = r.live && r.live[opp.uid];
+  if (live) {
+    if (typeof live.i === 'number' && live.i !== B.di && live.i < PVP.oppMons.length) { B.di = live.i; B.dEnergy = 0; floatText(`${PVP.oppName}: ${instName(PVP.oppMons[B.di])} 등장`, bW * 0.62, bH * 0.5, '#fff'); }
+    if (typeof live.hp === 'number') B.defHp[B.di] = live.hp;
+    if (live.ko && !PVP.finished) { pvpFinish(true); return; }
+  }
+  const moves = (r.moves && r.moves[opp.uid]) || {};
+  for (const key of Object.keys(moves).sort()) {
+    if (PVP.applied[key]) continue; PVP.applied[key] = true;
+    const mv = moves[key]; pvpReceiveMove(mv);
+  }
+  renderBattleHud();
+}
+function pvpReceiveMove(mv) {
+  const m = B.team[B.ti], d = PVP.oppMons[mv.i != null ? mv.i : B.di]; if (!m || !d || m.hp <= 0) return;
+  if (mv.k === 'dodge') { B.oppDodgeUntil = performance.now() + 500; return; }
+  const move = MOVES[mv.m]; if (!move) return;
+  const now = performance.now();
+  const x = mv.k === 'charged' ? Math.max(1, Math.min(1.5, +mv.x || 1)) : 1;
+  let dmg = Math.floor(damage(move.power, statAtk(MON[d.id], d.iv, d.level), statDef(MON[m.id], m.iv, m.level), typeMult(move.type, MON[m.id].types), MON[d.id].types.includes(move.type)) * x);
+  if (B.dodgeUntil > now) { dmg = Math.max(1, Math.floor(dmg * 0.25)); floatText('회피!', bW * 0.34, bH * 0.5, '#7fe0a6'); }
+  m.hp = Math.max(0, m.hp - dmg); B.shakeMe = now + 250; floatText('-' + dmg + (mv.k === 'charged' ? ' ' + move.name : ''), bW * 0.34, bH * 0.52, '#ff6f61');
+  if (mv.k === 'charged') bBurst(bW * 0.34, bH * 0.66, TYPES[move.type].color);
+  if (m.hp <= 0) { const i = B.team.findIndex((t, k) => k > B.ti && t.hp > 0); if (i < 0) { const any = B.team.findIndex(t => t.hp > 0); if (any < 0) { pvpWriteLive(); pvpFinish(false); return; } B.ti = any; } else B.ti = i; B.energy = 0; floatText('교체!', bW * 0.34, bH * 0.5, '#fff'); }
+  pvpWriteLive(); renderBattleHud();
+}
+function pvpCheckOpp() {
+  const r = PVP.room, opp = pvpOpp(); if (!opp || PVP.finished) return;
+  const live = r.live && r.live[opp.uid];
+  if (live && live.t && Date.now() - live.t > 20000) pvpFinish(true, '상대 연결이 끊겼어요');
+  if (Date.now() > PVP.timerEnd) {
+    const myFrac = B.team.reduce((a, t) => a + t.hp / instMaxHP(t), 0), oppFrac = PVP.oppMons.reduce((a, d, k) => a + (B.defHp[k] || 0) / instMaxHP(d), 0);
+    pvpFinish(myFrac >= oppFrac, '시간 종료');
+  }
+}
+function pvpFinish(won, reason) {
+  if (PVP.finished) return; PVP.finished = true; clearInterval(PVP.hbTimer);
+  S.pvp = S.pvp || { wins: 0, losses: 0 }; if (won) { S.pvp.wins++; addStat('pvpWins'); grantXp(300); } else { S.pvp.losses++; grantXp(80); }
+  journal(`${PVP.oppName}님과의 대전에서 ${won ? '이겼다' : '졌다'}`, 'gym'); save(); syncProfile().catch(() => {});
+  netPatch(`rooms/${PVP.code}/result`, { [NET.uid]: won ? 'win' : 'lose' }).catch(() => {});
+  B.won = won;
+  setTimeout(() => {
+    B.active = false; cancelAnimationFrame(B.raf); bEl.classList.remove('active'); B.mode = 'gym';
+    netStopStream('room'); const code = PVP.code; PVP.active = false; PVP.code = null; PVP.doc = null;
+    if (PVP.side === 'host') setTimeout(() => netDel('rooms/' + code).catch(() => {}), 15000);
+    openSheet(`<h3>${won ? '승리!' : '패배…'}</h3><p>${PVP.oppName}님과의 대전 ${reason ? '· ' + reason : ''}</p><div class="reward-row"><div class="rw">+${won ? 300 : 80} XP</div><div class="rw">전적 ${S.pvp.wins}승 ${S.pvp.losses}패</div></div><div class="btns"><button class="btn" onclick="closeSheet(); flushQueues()">확인</button></div>`);
+    updateHud();
+  }, 900);
+}
+
+// =====================================================================
+//  온라인 UI: 대전 · 랭킹 · 친구 · 교환 · 서버 설정
+// =====================================================================
+let onlineTab = 'pvp';
+for (const b of document.querySelectorAll('#online-tabs button')) b.onclick = () => { onlineTab = b.dataset.t; for (const x of document.querySelectorAll('#online-tabs button')) x.classList.toggle('on', x === b); renderOnlineTab(); };
+function renderOnline() { renderOnlineTab(); }
+const menuIconOnline = document.querySelector('.menu-items button[data-ov="online"] i');
+if (menuIconOnline) { const [c, cx] = makeCanvas(44); cx.scale(0.44, 0.44); drawGymIcon(cx, '#ff6f61'); menuIconOnline.appendChild(c); }
+
+function updateNetBadge() {
+  const b = $('#net-badge'); if (!b) return;
+  if (NET.state === 'off' && !netCfg()) { b.hidden = true; return; }
+  b.hidden = false; b.className = 'net-badge ' + (NET.state === 'on' ? 'on' : NET.state === 'error' ? 'err' : '');
+  const n = NET.state === 'on' ? Object.values(ON.players).filter(p => p && p.ts && Date.now() - p.ts < 10 * 60000).length : 0;
+  b.innerHTML = `<i></i>${NET.state === 'on' ? `온라인 ${n}명` : NET.state === 'connecting' ? '연결 중' : '오프라인'}`;
+  b.onclick = () => openServerSetup();
+}
+
+function notConnectedBox() {
+  const cfg = netCfg();
+  return `<div class="setup-box"><b>${cfg ? '서버에 연결되지 않았어요' : '멀티플레이는 서버 연결이 필요해요'}</b><div class="st ${NET.state === 'error' ? 'err' : ''}">${netStatusText()}</div>
+    <p class="sub" style="margin-top:6px">${NET.blocked ? '이 화면(테스트 링크)에서는 보안 정책 때문에 서버에 연결되지 않습니다. 앱이나 웹 주소로 열면 됩니다.' : '학원 서버 설정을 붙여넣으면 학생들끼리 대전·랭킹·교환을 할 수 있어요.'}</p>
+    <div class="btns"><button class="btn" id="btn-setup">${cfg ? '다시 연결 / 설정' : '서버 설정'}</button></div></div>`;
+}
+
+function renderOnlineTab() {
+  const body = $('#online-body'); if (!body) return;
+  if (!netOn()) { body.innerHTML = notConnectedBox() + offlineTabPreview(); const b = $('#btn-setup'); if (b) b.onclick = openServerSetup; return; }
+  if (onlineTab === 'pvp') renderPvpTab(body);
+  else if (onlineTab === 'rank') renderRankTab(body);
+  else if (onlineTab === 'friends') renderFriendsTab(body);
+  else renderTradeTab(body);
+}
+function offlineTabPreview() {
+  return `<div class="section-title">서버에 연결되면</div><div class="list">
+    <div class="item"><div>1:1 실시간 대전 <span>· 방 코드로 친구와 3마리 배틀</span></div></div>
+    <div class="item"><div>학원 랭킹 <span>· 경험치·도감·포획·배틀 승수</span></div></div>
+    <div class="item"><div>친구·교환 <span>· 친구 코드로 등록, 글몬 교환</span></div></div>
+    <div class="item"><div>공유 서당 <span>· 다른 학생이 지키는 서당을 빼앗기</span></div></div></div>`;
+}
+
+// ---- 대전 ----
+function renderPvpTab(body) {
+  const rec = S.pvp || { wins: 0, losses: 0 };
+  body.innerHTML = `
+    <div class="section-title">1:1 실시간 대전 · 전적 ${rec.wins}승 ${rec.losses}패</div>
+    <div class="big-btns">
+      <button class="btn warm" id="btn-pvp-quick">빠른 대전<small>기다리는 방에 바로 참가</small></button>
+      <button class="btn" id="btn-pvp-create">방 만들기<small>4자리 코드를 친구에게</small></button>
+    </div>
+    <div class="setup-box"><b>코드로 참가</b><input id="pvp-code" inputmode="numeric" maxlength="4" placeholder="친구가 알려준 4자리 코드"><div class="btns"><button class="btn ghost" id="btn-pvp-join">참가</button></div></div>
+    <div class="section-title">지금 접속한 친구</div><div id="pvp-friends"></div>
+    <p class="sub" style="margin-top:14px">서로 3마리를 고르고 3분 동안 배틀합니다. 탭으로 공격, 에너지가 차면 차지 기술, 좌우로 밀어 회피. 대전이 끝나면 체력은 원래대로 돌아와요.</p>`;
+  $('#btn-pvp-quick').onclick = () => pvpQuick().catch(e => toast('오류: ' + e.message));
+  $('#btn-pvp-create').onclick = () => pvpCreate().catch(e => toast('오류: ' + e.message));
+  $('#btn-pvp-join').onclick = () => pvpJoin($('#pvp-code').value).catch(e => toast('오류: ' + e.message));
+  const fl = $('#pvp-friends'); const online = (S.friends || []).map(u => [u, ON.players[u]]).filter(([u, p]) => p && p.ts && Date.now() - p.ts < 10 * 60000);
+  if (!online.length) fl.innerHTML = '<div class="empty">접속 중인 친구가 없어요. 친구 탭에서 코드로 등록하세요.</div>';
+  for (const [u, p] of online) { const d = document.createElement('div'); d.className = 'friend-row'; d.innerHTML = `<div><span class="online-dot on"></span>${p.name} <span>Lv ${p.level} · ${p.team ? TEAMS[p.team].name + ' 팀' : '팀 없음'}</span></div><button class="btn sm warm">대전 신청</button>`; d.querySelector('button').onclick = () => pvpInvite(u).catch(e => toast('오류: ' + e.message)); fl.appendChild(d); }
+}
+
+// ---- 랭킹 ----
+let rankKey = 'xp';
+function renderRankTab(body) {
+  const { list, v } = leaderboard(rankKey);
+  const keys = [['xp', '경험치'], ['dex', '도감'], ['catches', '포획'], ['pvp', '대전 승'], ['wins', '서당 승']];
+  body.innerHTML = `<div class="sort" style="margin-top:6px;display:inline-flex">${keys.map(([k, n]) => `<button data-k="${k}" class="${k === rankKey ? 'on' : ''}">${n}</button>`).join('')}</div><div id="rank-list"></div>`;
+  for (const b of body.querySelectorAll('[data-k]')) b.onclick = () => { rankKey = b.dataset.k; renderRankTab(body); };
+  const rl = $('#rank-list');
+  if (!list.length) rl.innerHTML = '<div class="empty">아직 아무도 없어요.</div>';
+  list.slice(0, 50).forEach((p, i) => {
+    const d = document.createElement('div'); d.className = 'rank-row' + (p.uid === NET.uid ? ' me' : '');
+    d.innerHTML = `<div class="no ${i < 3 ? 'top' : ''}">${i + 1}</div><div class="nm">${p.team ? `<span class="dot" style="background:${TEAMS[p.team].color}"></span>` : ''}${p.name}${p.uid === NET.uid ? ' (나)' : ''}<span>Lv ${p.level} · 도감 ${p.dex || 0} · 포획 ${p.catches || 0}</span></div><div class="val">${fmtNum(v(p))}</div>`;
+    rl.appendChild(d);
+  });
+}
+
+// ---- 친구 ----
+function renderFriendsTab(body) {
+  body.innerHTML = `<div class="section-title">내 친구 코드</div><div class="big-code">${ON.myCode}</div><p class="sub" style="text-align:center">친구에게 이 코드를 알려 주세요</p>
+    <div class="setup-box"><b>친구 추가</b><input id="friend-code" maxlength="6" placeholder="친구 코드 6자리" style="text-transform:uppercase"><div class="btns"><button class="btn" id="btn-friend-add">등록</button></div></div>
+    <div class="section-title">친구 (${(S.friends || []).length})</div><div id="friend-list"></div>`;
+  $('#btn-friend-add').onclick = () => addFriendByCode($('#friend-code').value);
+  const fl = $('#friend-list');
+  if (!(S.friends || []).length) fl.innerHTML = '<div class="empty">아직 친구가 없어요.</div>';
+  for (const u of S.friends || []) {
+    const p = ON.players[u]; const on = p && p.ts && Date.now() - p.ts < 10 * 60000;
+    const d = document.createElement('div'); d.className = 'friend-row';
+    d.innerHTML = `<div><span class="online-dot ${on ? 'on' : ''}"></span>${p ? p.name : '(알 수 없음)'} <span>${p ? `Lv ${p.level} · 도감 ${p.dex || 0} · ${on ? '접속 중' : '오프라인'}` : ''}</span></div><button class="btn sm ${on ? 'warm' : 'ghost'}" ${on ? '' : 'disabled'}>대전</button><button class="btn ghost sm" style="color:var(--coral)">삭제</button>`;
+    d.querySelectorAll('button')[0].onclick = () => pvpInvite(u).catch(e => toast('오류: ' + e.message));
+    d.querySelectorAll('button')[1].onclick = () => { S.friends = S.friends.filter(x => x !== u); save(); renderFriendsTab(body); };
+    fl.appendChild(d);
+  }
+}
+
+// ---- 교환 ----
+function renderTradeTab(body) {
+  body.innerHTML = `<div class="section-title">글몬 교환</div>
+    <div class="big-btns"><button class="btn warm" id="btn-trade-new">교환 만들기<small>내 글몬을 고르고 번호 받기</small></button><button class="btn" id="btn-trade-join">번호로 참가<small>친구의 4자리 번호</small></button></div>
+    <p class="sub" style="margin-top:14px">교환하면 받은 글몬의 사탕 1개를 얻습니다. 즐겨찾기·서당 배치 중인 글몬은 교환할 수 없어요. 교환한 글몬은 다시 교환할 수 없습니다.</p>`;
+  const filter = i => !i.fav && !i.atGym && !i.traded;
+  $('#btn-trade-new').onclick = () => pickMonster('내가 줄 글몬', filter, async inst => { try { const code = await createTrade(inst); renderTradeSheet(); toast(`교환 번호 ${code}`); } catch (e) { toast('오류: ' + e.message); } });
+  $('#btn-trade-join').onclick = () => promptSheet('교환 번호 (4자리)', '', code => pickMonster('내가 줄 글몬', filter, inst => joinTrade(code.trim(), inst).then(ok => { if (ok) renderTradeSheet(); }).catch(e => toast('오류: ' + e.message))));
+}
+
+// ---- 서버 설정 ----
+function openServerSetup() {
+  const cfg = netCfg() || {};
+  openSheet(`<h3>서버 연결</h3><p class="sub">Firebase 콘솔에서 복사한 설정(firebaseConfig)을 그대로 붙여넣으세요. apiKey와 databaseURL만 있으면 됩니다.</p>
+    <div class="setup-box"><textarea id="cfg-text" placeholder='const firebaseConfig = { apiKey: "AIza…", databaseURL: "https://…firebasedatabase.app", … };'>${cfg.apiKey ? `apiKey: "${cfg.apiKey}"\ndatabaseURL: "${cfg.databaseURL}"` : ''}</textarea>
+    <input id="cfg-group" placeholder="학원(반) 코드 — 같은 코드끼리 만납니다" value="${cfg.group || 'yujung'}">
+    <div class="st ${NET.state === 'on' ? 'on' : NET.state === 'error' ? 'err' : ''}" id="cfg-status">${netStatusText()}${NET.uid ? ' · 내 ID ' + NET.uid.slice(0, 6) : ''}</div></div>
+    <div class="btns"><button class="btn ghost" onclick="closeSheet()">닫기</button>${cfg.apiKey ? '<button class="btn ghost" id="btn-cfg-clear" style="color:var(--coral)">연결 해제</button>' : ''}<button class="btn" id="btn-cfg-save">연결</button></div>`);
+  $('#btn-cfg-save').onclick = async () => {
+    const parsed = parseServerConfig($('#cfg-text').value); if (!parsed) { $('#cfg-status').textContent = 'apiKey와 databaseURL을 찾지 못했어요. 콘솔의 설정을 통째로 붙여넣어 보세요.'; $('#cfg-status').className = 'st err'; return; }
+    parsed.group = ($('#cfg-group').value.trim() || 'yujung').replace(/[.#$\[\]\/]/g, '');
+    netSaveCfg(parsed); netStopAll(); $('#cfg-status').textContent = '연결 중…'; $('#cfg-status').className = 'st';
+    const ok = await netConnect(true);
+    $('#cfg-status').textContent = netStatusText() + (ok ? ' · 내 ID ' + NET.uid.slice(0, 6) : ''); $('#cfg-status').className = 'st ' + (ok ? 'on' : 'err');
+    if (ok) { setTimeout(() => { closeSheet(); renderOnlineTab(); }, 800); }
+  };
+  const cb = $('#btn-cfg-clear'); if (cb) cb.onclick = () => { netClearCfg(); netStopAll(); NET.state = 'off'; NET.cfg = null; updateNetBadge(); closeSheet(); renderOnlineTab(); toast('서버 연결을 해제했어요'); };
+}
+
 // ===== 시작 =====
 function boot() {
   load(); gymTick(); resizeMap(); updateHud();
+  netConnect(true).catch(() => {});
   const wa = document.getElementById('welcome-art'); const dpr = Math.min(2, window.devicePixelRatio || 1); wa.width = 150 * dpr; wa.height = 150 * dpr;
   const wctx = wa.getContext('2d'); wctx.scale(dpr, dpr); drawMonster(wctx, MON.mongle, 75, 75, 150, 0.5, { shadow: false, ignoreScale: true }); drawOrb(wctx, 120, 114, 20, -0.4);
   if (!S.welcomed) { document.getElementById('welcome').classList.add('show'); if (S.lastPos) useVirtualLocation(''); }
   else { startGeo(); if (ORI.granted !== false && !(typeof DeviceOrientationEvent !== 'undefined' && DeviceOrientationEvent.requestPermission)) startOrientation(); }
+  if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission !== 'function') startMotion().catch(() => {});   // 안드로이드: 권한 불필요
   (function frame(now) { if (!E.active && !B.active) drawMap(now); requestAnimationFrame(frame); })(performance.now());
-  setInterval(() => { if (geo.lat != null && !E.active) { computeSpawns(); tickEffects(); renderNearby(); } gymTick(); updateHud(); if (!modal.classList.contains('show')) flushQueues(); }, 5000);
+  setInterval(() => { if (geo.lat != null && !E.active) { computeSpawns(); tickEffects(); renderNearby(); } gymTick(); updateHud(); updateNetBadge(); if (!modal.classList.contains('show')) flushQueues(); }, 5000);
+  setInterval(() => { if (netOn() && !B.active) syncProfile().catch(() => {}); }, 5 * 60000);
+  window.addEventListener('online', () => { if (netCfg() && !netOn()) netConnect(true).catch(() => {}); });
   // 브라우저 뒤로가기 → 화면 닫기
   window.addEventListener('keydown', e => { if (e.key === 'Escape') { if (modal.classList.contains('show')) closeSheet(); else if (menuEl.classList.contains('show')) menuEl.classList.remove('show'); else if (ovStack.length) closeOverlay(); } });
 }
