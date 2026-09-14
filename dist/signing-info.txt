@@ -10,11 +10,11 @@ Verified using v4 scheme (APK Signature Scheme v4): false
 Verified for SourceStamp: false
 Number of signers: 1
 V2 Signer: certificate DN: CN=Geulmon Test Build, OU=CI, O=Geulmon, L=Seoul, C=KR
-V2 Signer: certificate SHA-256 digest: 6ac0e5145fa0dce5bfa1848edf6cc7557a76cea261332bdd61d0aeb99ce3bc98
-V2 Signer: certificate SHA-1 digest: 4ea4215f4e3b04eee62b91f788828c950e34c6ef
-V2 Signer: certificate MD5 digest: f520ca5697bb6d79a69ba5bfeec4b136
+V2 Signer: certificate SHA-256 digest: 393722e1df36148c7f2b2b5ce2a518bb4b3a849360e3b8f13c89718b93bf04e6
+V2 Signer: certificate SHA-1 digest: 2e24f7ef5e89f152844136b4af4427e06881cbf1
+V2 Signer: certificate MD5 digest: 2de99bea561d92f8fc5737e9e338f89d
 V2 Signer: key algorithm: RSA
 V2 Signer: key size (bits): 2048
-V2 Signer: public key SHA-256 digest: a678f98759e8ec9c000ab7ae30a1c85002adea9b26ee7638ee1e84f58a263460
-V2 Signer: public key SHA-1 digest: ac135a9156c1f3869fecd45e684378fc64c8fc73
-V2 Signer: public key MD5 digest: fcebf10cf345b41c6352d5f8b4caef17
+V2 Signer: public key SHA-256 digest: a2bd749448daac7881965d0b41370626fb8b8302e902a61f6e8e9a7bce9c2f1f
+V2 Signer: public key SHA-1 digest: f7b99efeb0627bb1e5de93bd288393911cf4876c
+V2 Signer: public key MD5 digest: 65a83037f10e9017697fc8c447ef4797
