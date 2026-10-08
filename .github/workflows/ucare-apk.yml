@@ -31,8 +31,13 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      # 기본값인 'tools' 패키지는 안드로이드 SDK 저장소에서 사라져서
+      # 그대로 쓰면 sdkmanager 가 exit 1 로 죽는다. 설치 목록을 직접 지정한다.
+      # 플랫폼/빌드툴은 AGP 가 라이선스 동의 후 알아서 받아 간다.
       - name: Android SDK 준비
         uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
 
       - name: Gradle 캐시
         uses: gradle/actions/setup-gradle@v4
