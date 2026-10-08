@@ -1,0 +1,52 @@
+plugins {
+    id 'com.android.application'
+}
+
+// 서명키는 레포에 두지 않는다. CI가 시크릿에서 복원하거나 임시 키를 만들어 준다.
+def ksFile  = rootProject.file(System.getenv('UCARE_KEYSTORE') ?: 'keystore/upload.jks')
+def ksPass  = System.getenv('UCARE_KEYSTORE_PASSWORD') ?: 'ucare2026'
+def alias_  = System.getenv('UCARE_KEY_ALIAS') ?: 'upload'
+def keyPass = System.getenv('UCARE_KEY_PASSWORD') ?: 'ucare2026'
+
+android {
+    namespace 'kr.co.kangyu.ucare'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'kr.co.kangyu.ucare'
+        minSdk 24
+        targetSdk 36
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    signingConfigs {
+        release {
+            storeFile ksFile
+            storePassword ksPass
+            keyAlias alias_
+            keyPassword keyPass
+        }
+    }
+
+    buildTypes {
+        release {
+            // 셸 앱이라 코드가 거의 없다. R8 설정 문제로 빌드가 깨지는 쪽이 손해가 크다.
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+        debug {
+            applicationIdSuffix '.debug'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    // Trusted Web Activity: 실제 크롬 엔진으로 사이트를 띄운다 (WebView 아님 → 구글 로그인 정상 동작)
+    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.5.0'
+}

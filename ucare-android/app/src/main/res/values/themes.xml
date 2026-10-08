@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 실제 화면은 크롬이 그린다. 런처 액티비티는 투명하게 둔다. -->
+    <style name="Theme.UCare" parent="android:Theme.Translucent.NoTitleBar" />
+</resources>

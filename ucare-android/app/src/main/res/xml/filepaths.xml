@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <files-path path="pwa-twa/" name="pwa-twa" />
+    <cache-path path="pwa-twa/" name="pwa-twa-cache" />
+    <external-path path="." name="external" />
+</paths>

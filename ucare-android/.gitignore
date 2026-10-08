@@ -1,0 +1,12 @@
+.gradle/
+build/
+app/build/
+local.properties
+.idea/
+*.iml
+.DS_Store
+
+# 서명키는 레포에 두지 않는다 (공개 레포)
+keystore/
+*.jks
+*.keystore

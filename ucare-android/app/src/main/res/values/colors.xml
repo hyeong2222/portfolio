@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- manifest.webmanifest 의 theme_color / background_color 와 같은 값 -->
+    <color name="themeColor">#003b22</color>
+    <color name="backgroundColor">#f5f4ed</color>
+    <color name="iconBackground">#003b22</color>
+</resources>
